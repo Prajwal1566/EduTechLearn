@@ -601,17 +601,6 @@ function AdminPanel() {
 }
 
 function App() {
-  const [wishlist, setWishlist] = useState([]);
-const addToWishlist = (course) => {
-  if (!wishlist.find((c) => c.id === course.id)) {
-    setWishlist([...wishlist, course]);
-  }
-};
-
-const removeFromWishlist = (id) => {
-  setWishlist(wishlist.filter((c) => c.id !== id));
-};
-
   return (
     <Router>
       <Routes>

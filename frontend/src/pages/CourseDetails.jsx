@@ -483,6 +483,7 @@ export default function CourseDetails() {
         if (found) { setIsPurchased(true); setProgress(found.progress || 0); setIsCompleted(found.completed === 1); }
         else { setIsPurchased(false); setIsCompleted(false); }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleMarkComplete = async () => {

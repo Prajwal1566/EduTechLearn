@@ -19,6 +19,7 @@ export default function MyCourses() {
       .then(res => res.json())
       .then(data => { setCourses(data); setLoading(false); })
       .catch(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
