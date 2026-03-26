@@ -636,9 +636,9 @@ export default function Signup() {
               </div>
               <span className="privacy-text">
                 I accept the{" "}
-                <a href="#" onClick={(e) => e.stopPropagation()}>Terms of Service</a>
+                <Link to="/terms" onClick={(e) => e.stopPropagation()}>Terms of Service</Link>
                 {" "}and{" "}
-                <a href="#" onClick={(e) => e.stopPropagation()}>Privacy Policy</a>
+                <Link to="/privacy" onClick={(e) => e.stopPropagation()}>Privacy Policy</Link>
               </span>
             </label>
 

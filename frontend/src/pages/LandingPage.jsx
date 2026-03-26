@@ -69,7 +69,7 @@ export default function LandingPage() {
             <span className="logo-text">EDU-TECH</span>
           </div>
           <div className="nav-links">
-            <a href="#" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }} className="nav-link">Features</a>
+            <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Features</button>
             <Link to="/about" className="nav-link">About</Link>
             <Link to="/contact" className="nav-link">Contact</Link>
             <Link to="/login" className="nav-btn nav-btn-login">Login</Link>
@@ -96,7 +96,7 @@ export default function LandingPage() {
                 Get Started
                 <span className="btn-arrow">→</span>
               </Link>
-              <a href="#" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-secondary">Learn More</a>
+              <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Learn More</button>
             </div>
           </div>
 
@@ -191,7 +191,7 @@ export default function LandingPage() {
           </div>
           <div className="footer-section">
             <h4>Quick Links</h4>
-            <a href="#" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Features</a>
+            <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Features</button>
             <Link to="/about">About</Link>
             <Link to="/login">Login</Link>
           </div>
