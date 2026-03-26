@@ -7,6 +7,7 @@ const BASE_URL = "http://127.0.0.1:5000";
 export default function MyCourses() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user ? user.id : null;
 
   const [courses, setCourses]   = useState([]);
   const [darkMode, setDarkMode] = useState(true);
@@ -14,13 +15,12 @@ export default function MyCourses() {
   const [loading, setLoading]   = useState(true);
 
   useEffect(() => {
-    if (!user) { navigate("/login"); return; }
-    fetch(`${BASE_URL}/api/my-courses/${user.id}`)
+    if (!userId) { navigate("/login"); return; }
+    fetch(`${BASE_URL}/api/my-courses/${userId}`)
       .then(res => res.json())
       .then(data => { setCourses(data); setLoading(false); })
       .catch(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId, navigate]);
 
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
 

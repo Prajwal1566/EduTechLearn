@@ -451,6 +451,7 @@ export default function CourseDetails() {
   const { id }    = useParams();
   const navigate  = useNavigate();
   const user      = JSON.parse(localStorage.getItem("user"));
+  const userId    = user ? user.id : null;
 
   const [course,       setCourse]       = useState(null);
   const [isPurchased,  setIsPurchased]  = useState(false);
@@ -475,16 +476,15 @@ export default function CourseDetails() {
 
   // Check purchase
   useEffect(() => {
-    if (!user) return;
-    fetch(`${BASE_URL}/api/my-courses/${user.id}`)
+    if (!userId) return;
+    fetch(`${BASE_URL}/api/my-courses/${userId}`)
       .then(r => r.json())
       .then(data => {
         const found = data.find(c => String(c.id) === String(id));
         if (found) { setIsPurchased(true); setProgress(found.progress || 0); setIsCompleted(found.completed === 1); }
         else { setIsPurchased(false); setIsCompleted(false); }
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, userId]);
 
   const handleMarkComplete = async () => {
     await fetch(`${BASE_URL}/api/update-progress`, {
