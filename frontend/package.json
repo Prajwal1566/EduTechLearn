@@ -1,7 +1,7 @@
 {
   "name": "elearning-frontend",
   "version": "0.1.0",
-  "homepage": "https://Prajwal1566.github.io/EduTech",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
