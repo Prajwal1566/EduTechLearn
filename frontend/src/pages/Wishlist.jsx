@@ -37,7 +37,7 @@ export default function Wishlist() {
         console.error("Failed to fetch courses:", err);
         setFetchError(true);
       });
-  }, []); // FIX 4: Empty dep array — run once on mount, no infinite re-runs
+  }, [navigate]); // FIX 4: Empty dep array — run once on mount, no infinite re-runs
 
   // FIX 5: Also clear "token" on logout (was only clearing "user" before)
   const handleLogout = () => {
