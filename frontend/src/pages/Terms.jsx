@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const styles = `
@@ -230,7 +231,7 @@ export default function Terms() {
         {/* ── NAVBAR ── */}
         <nav className="tc-navbar">
           <Link to="/home" className="tc-brand">
-            <div className="tc-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="tc-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="tc-brand-name">EDU-TECH</div>
               <div className="tc-brand-sub">E-Learning Platform</div>

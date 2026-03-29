@@ -1054,6 +1054,28 @@ body {
     font-size: 0.75rem;
   }
 }
+/* Reset button defaults for nav-link and footer-link-btn used on <button> elements */
+button.nav-link,
+.footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.footer-link-btn {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+
+.footer-link-btn:hover {
+  color: var(--white);
+}
 
 /* Small Mobile (320px - 479px) */
 @media (max-width: 480px) {

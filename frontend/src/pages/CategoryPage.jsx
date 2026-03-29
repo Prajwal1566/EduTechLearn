@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 
@@ -283,7 +284,7 @@ export default function CategoryPage() {
   const [courses,   setCourses]   = useState([]);
   const [sort,      setSort]      = useState("Default");
   const [menuOpen,  setMenuOpen]  = useState(false);
-  const [darkMode,  setDarkMode]  = useState(true);
+  const [darkMode,  setDarkMode]  = useState(() => localStorage.getItem("theme") !== "light");
 
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
 
@@ -302,6 +303,12 @@ export default function CategoryPage() {
     return 0;
   });
 
+  const toggleTheme = () => {
+  const next = !darkMode;
+  setDarkMode(next);
+  localStorage.setItem("theme", next ? "dark" : "light");
+};
+
   const avgRating = filtered.length
     ? (filtered.reduce((s, c) => s + parseFloat(c.rating || 0), 0) / filtered.length).toFixed(1)
     : "—";
@@ -318,7 +325,7 @@ export default function CategoryPage() {
         {/* ── NAVBAR ── */}
         <nav className="cat-navbar">
           <Link to="/home" className="cat-brand">
-            <div className="cat-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="cat-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="cat-brand-name">EDU-TECH</div>
               <div className="cat-brand-sub">E-Learning Platform</div>
@@ -331,11 +338,11 @@ export default function CategoryPage() {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile">Profile</Link>
             </div>
-            <button className="cat-icon-btn" onClick={() => setDarkMode(!darkMode)}>
+            <button className="cat-icon-btn" onClick={toggleTheme}>
               {darkMode ? "☀️" : "🌙"}
             </button>
             <button className="cat-logout" onClick={handleLogout}><span>⏻</span> Logout</button>
-            <button className={`cat-hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+            <button className={`cat-hamburger ${menuOpen ? "open" : ""}`} onClick={() => { toggleTheme(); setMenuOpen(false); }}>
               <span /><span /><span />
             </button>
           </div>

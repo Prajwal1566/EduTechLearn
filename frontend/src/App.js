@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "./asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import AdminUsers from "./pages/AdminUsers";
@@ -449,7 +450,7 @@ function AdminPanel() {
               <span /><span /><span />
             </button>
             <div className="adm-brand">
-              <div className="adm-brand-logo"><img src="/logow.png" alt="logo" /></div>
+              <div className="adm-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
               <div>
                 <div className="adm-brand-name">EDU-TECH</div>
                 <div className="adm-brand-sub">Admin Panel</div>

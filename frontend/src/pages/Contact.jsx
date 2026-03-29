@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const styles = `
@@ -313,7 +314,7 @@ export default function Contact() {
         {/* ── NAVBAR ── */}
         <nav className="ct-navbar">
           <Link to="/home" className="ct-brand">
-            <div className="ct-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="ct-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="ct-brand-name">EDU-TECH</div>
               <div className="ct-brand-sub">E-Learning Platform</div>

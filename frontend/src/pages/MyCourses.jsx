@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,10 +10,9 @@ export default function MyCourses() {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user ? user.id : null;
 
-  const [courses, setCourses]   = useState([]);
-  const [darkMode, setDarkMode] = useState(true);
+  const [courses, setCourses] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading]   = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) { navigate("/login"); return; }
@@ -25,15 +25,15 @@ export default function MyCourses() {
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
 
   const inProgress = courses.filter(c => c.completed === 0);
-  const completed  = courses.filter(c => c.completed === 1);
+  const completed = courses.filter(c => c.completed === 1);
 
   return (
-    <div className={`mc-root ${darkMode ? "" : "light"}`}>
+    <div className="mc-root">
 
       {/* ── NAVBAR ── */}
       <nav className="mc-navbar">
         <Link to="/home" className="mc-brand">
-          <div className="mc-brand-logo"><img src="/logow.png" alt="logo" /></div>
+          <div className="mc-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
           <div>
             <div className="mc-brand-name">EDU-TECH</div>
             <div className="mc-brand-sub">E-Learning Platform</div>
@@ -48,9 +48,6 @@ export default function MyCourses() {
         </div>
 
         <div className="mc-nav-actions">
-          <button className="mc-icon-btn" onClick={() => setDarkMode(!darkMode)}>
-            {darkMode ? "☀️" : "🌙"}
-          </button>
           <button className="mc-logout-btn" onClick={handleLogout}>
             <span>⏻</span> Logout
           </button>
@@ -66,17 +63,13 @@ export default function MyCourses() {
 
       {/* Mobile Drawer */}
       <div className={`mc-drawer ${menuOpen ? "open" : ""}`}>
-        <Link to="/home"         onClick={() => setMenuOpen(false)}>🏠 Home</Link>
+        <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
         <Link to="/my-courses" className="active" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-        <Link to="/wishlist"     onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-        <Link to="/profile"      onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
+        <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
+        <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
         <div className="mc-drawer-divider" />
         <div className="mc-drawer-row">
-          <button className="mc-icon-btn" style={{ flex:1, width:"auto", borderRadius:10 }}
-            onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }}>
-            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
-          <button className="mc-logout-btn" style={{ flex:1, justifyContent:"center" }} onClick={handleLogout}>
+          <button className="mc-logout-btn" style={{ flex: 1, justifyContent: "center" }} onClick={handleLogout}>
             ⏻ Logout
           </button>
         </div>
@@ -115,10 +108,10 @@ export default function MyCourses() {
 
         {loading ? (
           <div className="mc-grid">
-            {[1,2,3,4].map(i => (
+            {[1, 2, 3, 4].map(i => (
               <div key={i} className="mc-shimmer-wrap">
                 <div className="mc-shimmer mc-sh-img" />
-                <div style={{ padding:"12px 14px" }}>
+                <div style={{ padding: "12px 14px" }}>
                   <div className="mc-shimmer mc-sh-line" />
                   <div className="mc-shimmer mc-sh-short" />
                   <div className="mc-shimmer mc-sh-bar" />
@@ -249,7 +242,6 @@ export default function MyCourses() {
           color: #fff;
           overflow-x: hidden;
         }
-        .mc-root.light { background: #f5f0f5; color: #1a001a; }
 
         /* ── NAVBAR ── */
         .mc-navbar {
@@ -261,15 +253,12 @@ export default function MyCourses() {
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(255,255,255,0.07);
         }
-        .light .mc-navbar { background:rgba(245,240,245,0.93); border-bottom-color:rgba(76,0,62,0.1); }
 
         .mc-brand { display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0; }
         .mc-brand-logo { width:34px; height:34px; border-radius:9px; overflow:hidden; background:linear-gradient(135deg,#99037d,#4C003E); }
         .mc-brand-logo img { width:100%; height:100%; object-fit:cover; }
         .mc-brand-name { font-family:'Syne',sans-serif; font-weight:800; font-size:17px; color:#fff; letter-spacing:-.3px; }
-        .light .mc-brand-name { color:#2d002a; }
         .mc-brand-sub { font-size:10px; color:rgba(255,255,255,.38); letter-spacing:.5px; }
-        .light .mc-brand-sub { color:rgba(76,0,62,.42); }
 
         .mc-nav-links { display:flex; align-items:center; gap:2px; margin-left:auto; }
         .mc-nav-links a {
@@ -277,19 +266,8 @@ export default function MyCourses() {
           color:rgba(255,255,255,.52); text-decoration:none; transition:all .2s; white-space:nowrap;
         }
         .mc-nav-links a:hover, .mc-nav-links a.active { color:#fff; background:rgba(255,255,255,.08); }
-        .light .mc-nav-links a { color:rgba(76,0,62,.58); }
-        .light .mc-nav-links a:hover, .light .mc-nav-links a.active { color:#4C003E; background:rgba(76,0,62,.08); }
 
         .mc-nav-actions { display:flex; align-items:center; gap:6px; margin-left:10px; }
-
-        .mc-icon-btn {
-          width:36px; height:36px; border-radius:9px;
-          border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05);
-          color:rgba(255,255,255,.6); cursor:pointer; font-size:15px;
-          display:flex; align-items:center; justify-content:center; transition:all .2s;
-        }
-        .mc-icon-btn:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); color:#fff; }
-        .light .mc-icon-btn { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); color:#4C003E; }
 
         .mc-logout-btn {
           display:flex; align-items:center; gap:6px; padding:8px 16px; border-radius:9px;
@@ -298,7 +276,6 @@ export default function MyCourses() {
           transition:all .2s; white-space:nowrap;
         }
         .mc-logout-btn:hover { background:rgba(255,60,60,.15); border-color:rgba(255,100,100,.4); color:#ff8888; }
-        .light .mc-logout-btn { border-color:rgba(200,0,0,.15); background:rgba(200,0,0,.04); color:rgba(180,0,0,.7); }
 
         /* Hamburger */
         .mc-hamburger {
@@ -308,9 +285,7 @@ export default function MyCourses() {
           cursor:pointer; padding:0; transition:all .2s; flex-shrink:0;
         }
         .mc-hamburger:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); }
-        .light .mc-hamburger { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); }
         .mc-hamburger span { display:block; width:18px; height:2px; background:rgba(255,255,255,.7); border-radius:99px; transition:all .3s ease; }
-        .light .mc-hamburger span { background:#4C003E; }
         .mc-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
         .mc-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
         .mc-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
@@ -323,7 +298,6 @@ export default function MyCourses() {
           padding:14px 18px 18px; flex-direction:column; gap:4px;
           animation:mcSlide .22s ease;
         }
-        .light .mc-drawer { background:rgba(245,240,245,0.98); border-bottom-color:rgba(76,0,62,.1); }
         @keyframes mcSlide { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
         .mc-drawer.open { display:flex; }
         .mc-drawer a {
@@ -331,10 +305,7 @@ export default function MyCourses() {
           color:rgba(255,255,255,.65); text-decoration:none; transition:all .2s; border:1px solid transparent;
         }
         .mc-drawer a:hover, .mc-drawer a.active { color:#fff; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.08); }
-        .light .mc-drawer a { color:rgba(76,0,62,.65); }
-        .light .mc-drawer a:hover, .light .mc-drawer a.active { color:#4C003E; background:rgba(76,0,62,.08); border-color:rgba(76,0,62,.1); }
         .mc-drawer-divider { height:1px; background:rgba(255,255,255,.07); margin:8px 0; }
-        .light .mc-drawer-divider { background:rgba(76,0,62,.08); }
         .mc-drawer-row { display:flex; gap:8px; }
 
         /* ── HERO ── */
@@ -343,7 +314,6 @@ export default function MyCourses() {
           padding:28px 32px 26px;
           background:rgba(255,255,255,.02);
         }
-        .light .mc-hero { border-bottom-color:rgba(76,0,62,.08); background:rgba(76,0,62,.02); }
 
         .mc-hero-inner {
           max-width:1100px; margin:0 auto;
@@ -357,9 +327,7 @@ export default function MyCourses() {
           display:flex; align-items:center; justify-content:center; font-size:22px;
         }
         .mc-hero-title { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; color:#fff; margin-bottom:3px; }
-        .light .mc-hero-title { color:#1a001a; }
         .mc-hero-sub { font-size:13px; color:rgba(255,255,255,.42); }
-        .light .mc-hero-sub { color:rgba(76,0,62,.5); }
 
         /* Stat pills */
         .mc-hero-stats { display:flex; gap:10px; flex-wrap:wrap; }
@@ -369,14 +337,10 @@ export default function MyCourses() {
           background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
           min-width:80px;
         }
-        .light .mc-stat-pill { background:#fff; border-color:rgba(76,0,62,.1); box-shadow:0 2px 8px rgba(76,0,62,.07); }
         .mc-stat-pill.completed-pill { background:rgba(68,238,136,.07); border-color:rgba(68,238,136,.2); }
-        .light .mc-stat-pill.completed-pill { background:rgba(68,238,136,.05); border-color:rgba(68,238,136,.18); }
         .mc-stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; color:#fff; line-height:1; }
-        .light .mc-stat-num { color:#1a001a; }
         .mc-stat-pill.completed-pill .mc-stat-num { color:#44ee88; }
         .mc-stat-label { font-size:10px; color:rgba(255,255,255,.4); margin-top:3px; text-transform:uppercase; letter-spacing:.4px; }
-        .light .mc-stat-label { color:rgba(76,0,62,.5); }
 
         /* ── CONTENT ── */
         .mc-content { max-width:1100px; margin:0 auto; padding:32px 24px 60px; }
@@ -387,12 +351,10 @@ export default function MyCourses() {
           font-family:'Syne',sans-serif; font-weight:700; font-size:17px;
           color:#fff; display:flex; align-items:center; gap:8px; margin-bottom:20px;
         }
-        .light .mc-section-title { color:#1a001a; }
         .mc-count-pill {
           font-size:11px; font-weight:600; padding:3px 9px; border-radius:99px;
           background:rgba(153,3,125,.2); color:#e060c8; border:1px solid rgba(153,3,125,.28);
         }
-        .light .mc-count-pill { background:rgba(153,3,125,.09); color:#99037d; }
 
         /* Course grid */
         .mc-grid {
@@ -413,18 +375,14 @@ export default function MyCourses() {
           border-top:none;
           padding:10px 14px 8px;
         }
-        .light .mc-progress-section { background:#fff; border-color:rgba(76,0,62,.1); }
         .mc-progress-header {
           display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;
         }
         .mc-progress-label { font-size:11px; color:rgba(255,255,255,.4); }
-        .light .mc-progress-label { color:rgba(76,0,62,.5); }
         .mc-progress-pct { font-size:11px; font-weight:700; color:#e060c8; }
-        .light .mc-progress-pct { color:#99037d; }
         .mc-progress-track {
           height:5px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden;
         }
-        .light .mc-progress-track { background:rgba(76,0,62,.1); }
         .mc-progress-fill {
           height:100%; border-radius:99px;
           background:linear-gradient(90deg,#99037d,#cc05a0);
@@ -449,7 +407,6 @@ export default function MyCourses() {
           font-size:12px; font-weight:600; color:#44ee88;
           display:flex; align-items:center; gap:6px;
         }
-        .light .mc-completed-badge { background:rgba(68,238,136,.05); }
 
         /* Certificate button */
         .mc-cert-btn {
@@ -464,12 +421,10 @@ export default function MyCourses() {
 
         /* ── SHIMMER LOADING ── */
         .mc-shimmer-wrap { border-radius:14px; overflow:hidden; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.07); }
-        .light .mc-shimmer-wrap { background:#fff; border-color:rgba(76,0,62,.08); }
         .mc-shimmer {
           background:linear-gradient(90deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.05) 100%);
           background-size:200% 100%; animation:mcShim 1.5s infinite;
         }
-        .light .mc-shimmer { background:linear-gradient(90deg,#f0e8f0 0%,#e4d4e4 50%,#f0e8f0 100%); background-size:200% 100%; }
         @keyframes mcShim { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
         .mc-sh-img   { height:150px; }
         .mc-sh-line  { height:13px; border-radius:6px; margin-bottom:8px; }
@@ -482,12 +437,9 @@ export default function MyCourses() {
           text-align:center; padding:80px 20px; border-radius:16px;
           background:rgba(255,255,255,.03); border:1px dashed rgba(255,255,255,.1);
         }
-        .light .mc-empty { background:rgba(76,0,62,.02); border-color:rgba(76,0,62,.1); }
         .mc-empty-icon { font-size:52px; margin-bottom:14px; }
         .mc-empty-title { font-family:'Syne',sans-serif; font-weight:700; font-size:19px; color:#fff; margin-bottom:8px; }
-        .light .mc-empty-title { color:#1a001a; }
         .mc-empty-text { font-size:13px; color:rgba(255,255,255,.35); margin-bottom:24px; }
-        .light .mc-empty-text { color:rgba(76,0,62,.45); }
         .mc-browse-btn {
           display:inline-flex; align-items:center; gap:8px;
           padding:12px 26px; border-radius:11px;
@@ -499,7 +451,6 @@ export default function MyCourses() {
 
         /* ── FOOTER ── */
         .mc-footer { background:rgba(0,0,0,.28); border-top:1px solid rgba(255,255,255,.06); padding:40px 32px 24px; }
-        .light .mc-footer { background:rgba(76,0,62,.04); border-top-color:rgba(76,0,62,.1); }
         .mc-footer-grid {
           max-width:1100px; margin:0 auto;
           display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -507,14 +458,9 @@ export default function MyCourses() {
         }
         .mc-footer-col h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:#fff; margin-bottom:8px; }
         .mc-footer-col h4 { font-family:'Syne',sans-serif; font-weight:600; font-size:13px; color:rgba(255,255,255,.55); margin-bottom:8px; }
-        .light .mc-footer-col h3 { color:#1a001a; }
-        .light .mc-footer-col h4 { color:rgba(76,0,62,.58); }
         .mc-footer-col p, .mc-footer-col a { font-size:12px; color:rgba(255,255,255,.32); text-decoration:none; display:block; margin-bottom:5px; transition:color .2s; }
         .mc-footer-col a:hover { color:rgba(255,255,255,.7); }
-        .light .mc-footer-col p, .light .mc-footer-col a { color:rgba(76,0,62,.42); }
-        .light .mc-footer-col a:hover { color:#4C003E; }
         .mc-footer-bottom { max-width:1100px; margin:0 auto; padding-top:20px; border-top:1px solid rgba(255,255,255,.06); font-size:12px; color:rgba(255,255,255,.22); text-align:center; }
-        .light .mc-footer-bottom { border-top-color:rgba(76,0,62,.08); color:rgba(76,0,62,.35); }
 
         /* ── RESPONSIVE ── */
         @media (max-width:768px) {

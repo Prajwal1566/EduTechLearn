@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -74,18 +75,6 @@ const styles = `
   .hm-nav-links a:hover, .hm-nav-links a.active { color:#fff; background:rgba(255,255,255,.08); }
   .light .hm-nav-links a { color:rgba(76,0,62,.58); }
   .light .hm-nav-links a:hover, .light .hm-nav-links a.active { color:#4C003E; background:rgba(76,0,62,.08); }
-
-  .icon-btn {
-    width:36px; height:36px; border-radius:9px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.05);
-    color:rgba(255,255,255,.6); cursor:pointer; font-size:15px;
-    display:flex; align-items:center; justify-content:center;
-    transition:all .2s; flex-shrink:0;
-  }
-  .icon-btn:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); color:#fff; }
-  .light .icon-btn { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); color:#4C003E; }
-  .light .icon-btn:hover { background:rgba(76,0,62,.1); }
 
   .logout-btn {
     display:flex; align-items:center; gap:6px;
@@ -367,7 +356,6 @@ const styles = `
     .hm-navbar { padding:0 16px; }
     .hm-nav-links { display:none; }
     .logout-btn { display:none; }
-    .icon-btn.theme-icon { display:none; }
     .hamburger { display:flex; }
     .hm-hero { padding:44px 16px 100px; }
     .hm-stats-band { padding:0 16px; }
@@ -393,7 +381,6 @@ export default function Home({ onAddWishlist }) {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
-  const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -428,14 +415,14 @@ export default function Home({ onAddWishlist }) {
   return (
     <>
       <style>{styles}</style>
-      <div className={`hm-root ${darkMode ? "" : "light"}`}>
+      <div className="hm-root">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
 
         {/* ── NAVBAR ── */}
         <nav className="hm-navbar">
           <Link to="/home" className="hm-brand">
-            <div className="hm-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="hm-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="hm-brand-name">EDU-TECH</div>
               <div className="hm-brand-sub">E-Learning Platform</div>
@@ -449,9 +436,6 @@ export default function Home({ onAddWishlist }) {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile">Profile</Link>
             </div>
-            <button className="icon-btn theme-icon" onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? "☀️" : "🌙"}
-            </button>
             <button className="logout-btn" onClick={handleLogout}>
               <span>⏻</span> Logout
             </button>
@@ -469,10 +453,7 @@ export default function Home({ onAddWishlist }) {
           <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
           <div className="mobile-divider" />
           <div className="mobile-actions">
-            <button className="icon-btn" style={{ flex:1, width:"auto", borderRadius:10 }} onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }}>
-              {darkMode ? "☀️ Light" : "🌙 Dark"}
-            </button>
-            <button className="logout-btn" onClick={handleLogout}>⏻ Logout</button>
+            <button className="logout-btn" style={{ flex:1, justifyContent:"center" }} onClick={handleLogout}>⏻ Logout</button>
           </div>
         </div>
 

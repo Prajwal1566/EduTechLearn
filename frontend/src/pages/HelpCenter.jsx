@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const styles = `
@@ -304,7 +305,7 @@ export default function HelpCenter() {
         {/* ── NAVBAR ── */}
         <nav className="hc-navbar">
           <Link to="/home" className="hc-brand">
-            <div className="hc-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="hc-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="hc-brand-name">EDU-TECH</div>
               <div className="hc-brand-sub">E-Learning Platform</div>

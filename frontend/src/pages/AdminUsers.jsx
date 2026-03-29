@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const BASE_URL = "http://127.0.0.1:5000";
@@ -8,24 +9,32 @@ export default function AdminUsers() {
   const [users, setUsers]       = useState([]);
   const [search, setSearch]     = useState("");
   const [loading, setLoading]   = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [deleteId, setDeleteId] = useState(null); // for confirm modal
 
   // ── same logic as original ──
   const fetchUsers = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
     fetch(`${BASE_URL}/api/admin/users`, {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(data => { setUsers(data); setLoading(false); })
+      .then(data => { 
+        if (Array.isArray(data)) {
+          setUsers(data); 
+        } else {
+          console.error("Expected an array of users but got:", data);
+          setUsers([]);
+        }
+        setLoading(false); 
+      })
       .catch(err => { console.error("Error loading users", err); setLoading(false); });
   };
 
   useEffect(() => { fetchUsers(); }, []);
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
     await fetch(`${BASE_URL}/api/admin/delete-user/${id}`, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${token}` }
@@ -34,7 +43,7 @@ export default function AdminUsers() {
     setDeleteId(null);
   };
 
-  const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
+  const handleLogout = () => { localStorage.removeItem("user"); localStorage.removeItem("token"); sessionStorage.removeItem("token"); sessionStorage.removeItem("admin"); navigate("/"); };
 
   const filtered = users.filter(u =>
     u.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -57,7 +66,7 @@ export default function AdminUsers() {
             <span /><span /><span />
           </button>
           <div className="au-brand">
-            <div className="au-brand-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="au-brand-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="au-brand-name">EDU-TECH</div>
               <div className="au-brand-sub">Admin Panel</div>

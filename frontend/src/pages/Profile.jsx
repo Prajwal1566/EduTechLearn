@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const styles = `
@@ -13,7 +14,6 @@ const styles = `
     position: relative;
     overflow-x: hidden;
   }
-  .pr-root.light { background: #f5f0f5; }
 
   .orb {
     position: fixed;
@@ -34,8 +34,6 @@ const styles = `
     bottom: -60px; right: -60px;
     animation-delay: -4s;
   }
-  .light .orb-1 { background: radial-gradient(circle, #cc05a012, transparent); }
-  .light .orb-2 { background: radial-gradient(circle, #99037d0d, transparent); }
   @keyframes floatOrb {
     0%,100% { transform: translate(0,0) scale(1); }
     50% { transform: translate(20px,-30px) scale(1.05); }
@@ -51,10 +49,6 @@ const styles = `
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
-  .light .pr-navbar {
-    background: rgba(245,240,245,0.92);
-    border-bottom: 1px solid rgba(76,0,62,0.1);
-  }
 
   .pr-nav-brand {
     display: flex; align-items: center; gap: 10px;
@@ -69,9 +63,7 @@ const styles = `
   }
   .pr-nav-logo img { width:100%; height:100%; object-fit:cover; }
   .pr-nav-brand-text { font-family:'Syne',sans-serif; font-weight:800; font-size:17px; color:#fff; letter-spacing:-.3px; }
-  .light .pr-nav-brand-text { color:#2d002a; }
   .pr-nav-brand-sub { font-size:10px; color:rgba(255,255,255,.4); letter-spacing:.5px; }
-  .light .pr-nav-brand-sub { color:rgba(76,0,62,.45); }
 
   /* Nav links — pushed to RIGHT side */
   .pr-nav-right {
@@ -94,21 +86,6 @@ const styles = `
     white-space: nowrap;
   }
   .pr-nav-links a:hover, .pr-nav-links a.active { color:#fff; background:rgba(255,255,255,.08); }
-  .light .pr-nav-links a { color:rgba(76,0,62,.6); }
-  .light .pr-nav-links a:hover, .light .pr-nav-links a.active { color:#4C003E; background:rgba(76,0,62,.08); }
-
-  .icon-btn {
-    width:36px; height:36px; border-radius:9px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.05);
-    color:rgba(255,255,255,.6);
-    cursor:pointer; font-size:15px;
-    display:flex; align-items:center; justify-content:center;
-    transition:all .2s; flex-shrink: 0;
-  }
-  .icon-btn:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); color:#fff; }
-  .light .icon-btn { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); color:#4C003E; }
-  .light .icon-btn:hover { background:rgba(76,0,62,.1); }
 
   .logout-btn {
     display:flex; align-items:center; gap:6px;
@@ -121,7 +98,6 @@ const styles = `
     transition:all .2s; white-space: nowrap;
   }
   .logout-btn:hover { background:rgba(255,60,60,.15); border-color:rgba(255,100,100,.4); color:#ff8888; }
-  .light .logout-btn { border-color:rgba(200,0,0,.15); background:rgba(200,0,0,.04); color:rgba(180,0,0,.7); }
 
   /* Hamburger */
   .hamburger {
@@ -136,14 +112,12 @@ const styles = `
     transition: all .2s;
   }
   .hamburger:hover { background: rgba(153,3,125,.2); border-color: rgba(153,3,125,.4); }
-  .light .hamburger { border-color: rgba(76,0,62,.13); background: rgba(76,0,62,.05); }
   .hamburger span {
     display: block; width: 18px; height: 2px;
     background: rgba(255,255,255,.7);
     border-radius: 99px;
     transition: all .3s ease;
   }
-  .light .hamburger span { background: #4C003E; }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -161,10 +135,6 @@ const styles = `
     flex-direction: column;
     gap: 4px;
     animation: slideDown .25s ease;
-  }
-  .light .mobile-menu {
-    background: rgba(245,240,245,0.97);
-    border-bottom-color: rgba(76,0,62,.1);
   }
   @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
@@ -186,17 +156,12 @@ const styles = `
     background: rgba(255,255,255,.07);
     border-color: rgba(255,255,255,.08);
   }
-  .light .mobile-menu a { color: rgba(76,0,62,.65); }
-  .light .mobile-menu a:hover, .light .mobile-menu a.active {
-    color: #4C003E; background: rgba(76,0,62,.08); border-color: rgba(76,0,62,.1);
-  }
 
   .mobile-menu-divider {
     height: 1px;
     background: rgba(255,255,255,.07);
     margin: 8px 0;
   }
-  .light .mobile-menu-divider { background: rgba(76,0,62,.08); }
 
   .mobile-actions {
     display: flex; gap: 8px; margin-top: 4px;
@@ -209,7 +174,6 @@ const styles = `
     background: linear-gradient(135deg, #2a001f 0%, #4C003E 50%, #330028 100%);
     padding: 40px 32px 88px;
     overflow: hidden;
-    /* Fix: no margin-top, sticks right below navbar */
   }
   .pr-hero::before {
     content: '';
@@ -217,7 +181,6 @@ const styles = `
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 200px; opacity: .03;
   }
-  /* Decorative orb inside hero */
   .pr-hero::after {
     content: '';
     position: absolute;
@@ -301,11 +264,6 @@ const styles = `
     overflow: hidden;
     box-shadow: 0 16px 48px rgba(0,0,0,.35);
   }
-  .light .pr-stats-card {
-    background: #fff;
-    border: 1px solid rgba(76,0,62,.1);
-    box-shadow: 0 8px 32px rgba(76,0,62,.08);
-  }
   .pr-stat-item {
     padding: 20px 16px; text-align: center;
     border-right: 1px solid rgba(255,255,255,.07);
@@ -313,11 +271,8 @@ const styles = `
   }
   .pr-stat-item:last-child { border-right: none; }
   .pr-stat-item:hover { background: rgba(153,3,125,.08); }
-  .light .pr-stat-item { border-right-color: rgba(76,0,62,.07); }
   .pr-stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:28px; color:#fff; line-height:1; }
-  .light .pr-stat-num { color:#2d002a; }
   .pr-stat-label { font-size:11px; color:rgba(255,255,255,.4); margin-top:5px; letter-spacing:.4px; text-transform:uppercase; }
-  .light .pr-stat-label { color:rgba(76,0,62,.5); }
   .pr-stat-icon { font-size:20px; margin-bottom:6px; }
 
   /* ── MAIN CONTENT ── */
@@ -332,7 +287,6 @@ const styles = `
     color:#fff; margin-bottom:16px;
     display:flex; align-items:center; gap:8px;
   }
-  .light .pr-section-title { color:#1a001a; }
 
   .course-grid {
     display: grid;
@@ -346,19 +300,13 @@ const styles = `
     cursor: pointer; transition: all .25s ease; position: relative;
   }
   .course-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.4),0 0 0 1px rgba(153,3,125,.2); }
-  .light .course-card { background:#fff; border-color:rgba(76,0,62,.1); box-shadow:0 2px 12px rgba(76,0,62,.06); }
-  .light .course-card:hover { box-shadow:0 12px 32px rgba(76,0,62,.14); }
   .course-thumb { width:100%; height:130px; object-fit:cover; display:block; background:linear-gradient(135deg,#2a001f,#4C003E); }
   .course-info { padding:12px 14px 14px; }
   .course-title { font-weight:600; font-size:13px; color:#fff; line-height:1.4; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-  .light .course-title { color:#1a001a; }
   .course-lecturer { font-size:11px; color:rgba(255,255,255,.4); margin-bottom:8px; }
-  .light .course-lecturer { color:rgba(76,0,62,.5); }
   .progress-bar-wrap { height:4px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; }
-  .light .progress-bar-wrap { background:rgba(76,0,62,.1); }
   .progress-bar-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#99037d,#cc05a0); transition:width .6s ease; }
   .progress-label { font-size:10px; color:rgba(255,255,255,.35); margin-top:4px; text-align:right; }
-  .light .progress-label { color:rgba(76,0,62,.45); }
 
   .empty-state {
     text-align:center; padding:36px 20px;
@@ -367,10 +315,8 @@ const styles = `
     border:1px dashed rgba(255,255,255,.1);
     margin-bottom:32px;
   }
-  .light .empty-state { background:rgba(76,0,62,.02); border-color:rgba(76,0,62,.1); }
   .empty-icon { font-size:36px; margin-bottom:10px; }
   .empty-text { font-size:13px; color:rgba(255,255,255,.35); }
-  .light .empty-text { color:rgba(76,0,62,.45); }
 
   .cert-list { display:flex; flex-direction:column; gap:10px; margin-bottom:36px; }
   .cert-item {
@@ -381,11 +327,8 @@ const styles = `
     transition:all .2s; flex-wrap:wrap;
   }
   .cert-item:hover { background:rgba(153,3,125,.08); border-color:rgba(153,3,125,.2); }
-  .light .cert-item { background:#fff; border-color:rgba(76,0,62,.1); box-shadow:0 2px 10px rgba(76,0,62,.05); }
-  .light .cert-item:hover { background:#fdf5fd; border-color:rgba(153,3,125,.2); }
   .cert-icon { font-size:22px; flex-shrink:0; }
   .cert-title { flex:1; font-size:14px; font-weight:600; color:#fff; min-width:120px; }
-  .light .cert-title { color:#1a001a; }
   .cert-badge { padding:3px 9px; border-radius:99px; background:rgba(68,238,136,.1); border:1px solid rgba(68,238,136,.25); color:#44ee88; font-size:10px; font-weight:600; letter-spacing:.3px; }
   .download-btn {
     display:flex; align-items:center; gap:6px;
@@ -402,7 +345,6 @@ const styles = `
     border-top:1px solid rgba(255,255,255,.06);
     padding:40px 32px 24px;
   }
-  .light .pr-footer { background:rgba(76,0,62,.04); border-top-color:rgba(76,0,62,.1); }
   .pr-footer-grid {
     max-width:900px; margin:0 auto;
     display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
@@ -410,14 +352,9 @@ const styles = `
   }
   .pr-footer-col h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:#fff; margin-bottom:8px; }
   .pr-footer-col h4 { font-family:'Syne',sans-serif; font-weight:600; font-size:13px; color:rgba(255,255,255,.6); margin-bottom:8px; }
-  .light .pr-footer-col h3 { color:#1a001a; }
-  .light .pr-footer-col h4 { color:rgba(76,0,62,.6); }
   .pr-footer-col p, .pr-footer-col a { font-size:12px; color:rgba(255,255,255,.35); text-decoration:none; display:block; margin-bottom:4px; transition:color .2s; }
   .pr-footer-col a:hover { color:rgba(255,255,255,.7); }
-  .light .pr-footer-col p, .light .pr-footer-col a { color:rgba(76,0,62,.45); }
-  .light .pr-footer-col a:hover { color:#4C003E; }
   .pr-footer-bottom { max-width:900px; margin:0 auto; padding-top:20px; border-top:1px solid rgba(255,255,255,.06); font-size:12px; color:rgba(255,255,255,.25); text-align:center; }
-  .light .pr-footer-bottom { border-top-color:rgba(76,0,62,.08); color:rgba(76,0,62,.35); }
 
   /* Shimmer */
   .shimmer {
@@ -426,21 +363,14 @@ const styles = `
     background-size:200% 100%;
     animation:shimmerAnim 1.5s infinite;
   }
-  .light .shimmer { background:linear-gradient(90deg,#f0e8f0 0%,#e4d4e4 50%,#f0e8f0 100%); background-size:200% 100%; }
   @keyframes shimmerAnim { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
 
   /* ── RESPONSIVE ── */
   @media(max-width:768px){
     .pr-navbar { padding: 0 16px; }
-
-    /* Hide desktop links on mobile */
     .pr-nav-links { display: none; }
     .logout-btn { display: none; }
-    .icon-btn.theme-icon { display: none; }
-
-    /* Show hamburger on mobile */
     .hamburger { display: flex; }
-
     .pr-hero { padding: 28px 16px 84px; }
     .pr-hero-name { font-size: 20px; }
     .pr-content { padding: 28px 16px 48px; }
@@ -464,7 +394,6 @@ export default function Profile() {
   const [myCourses, setMyCourses] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
-  const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -495,7 +424,7 @@ export default function Profile() {
   return (
     <>
       <style>{styles}</style>
-      <div className={`pr-root ${darkMode ? "" : "light"}`}>
+      <div className="pr-root">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
 
@@ -503,7 +432,7 @@ export default function Profile() {
         <nav className="pr-navbar">
           {/* Brand — LEFT */}
           <Link to="/home" className="pr-nav-brand">
-            <div className="pr-nav-logo"><img src="/logow.png" alt="logo" /></div>
+            <div className="pr-nav-logo"><img src={logo} alt="EDU-TECH Logo" className="logo-image" /></div>
             <div>
               <div className="pr-nav-brand-text">EDU-TECH</div>
               <div className="pr-nav-brand-sub">E-Learning Platform</div>
@@ -519,11 +448,6 @@ export default function Profile() {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile" className="active">My Profile</Link>
             </div>
-
-            {/* Theme toggle — desktop */}
-            <button className="icon-btn theme-icon" onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? "☀️" : "🌙"}
-            </button>
 
             {/* Logout — desktop */}
             <button className="logout-btn" onClick={handleLogout}>
@@ -549,11 +473,8 @@ export default function Profile() {
           <Link to="/profile" className="active" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
           <div className="mobile-menu-divider" />
           <div className="mobile-actions">
-            <button className="icon-btn" style={{ flex: 1, width: "auto", borderRadius: 10 }} onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }}>
-              {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-            </button>
             <button className="logout-btn" style={{ flex: 1, justifyContent: "center" }} onClick={handleLogout}>
-              ⍈ Logout
+              ⏻ Logout
             </button>
           </div>
         </div>

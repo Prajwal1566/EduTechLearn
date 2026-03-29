@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const styles = `
@@ -571,7 +572,7 @@ export default function EditProfile() {
         <nav className="ep-navbar">
           <Link to="/profile" className="ep-navbar-brand">
             <div className="ep-navbar-logo">
-              <img src="/logow.png" alt="logo" />
+              <img src={logo} alt="EDU-TECH Logo" className="logo-image" />
             </div>
             EDU-TECH
           </Link>

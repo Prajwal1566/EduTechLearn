@@ -50,6 +50,11 @@ export default function LandingPage() {
     };
   }, [hasStarted, students, courses, successRate]);
 
+  const scrollToFeatures = (e) => {
+    e.preventDefault();
+    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="landing-container">
       {/* Animated Background Orbs */}
@@ -64,12 +69,13 @@ export default function LandingPage() {
         <div className="navbar-content">
           <div className="logo">
             <span className="logo-icon">
-                <img src={logo} alt="EDU-TECH Logo" className="logo-image" />
+              <img src={logo} alt="EDU-TECH Logo" className="logo-image" />
             </span>
             <span className="logo-text">EDU-TECH</span>
           </div>
           <div className="nav-links">
-            <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Features</button>
+            {/* FIX: was <button className="btn btn-secondary"> — now matches About/Contact style */}
+            <a href="#features" className="nav-link" onClick={scrollToFeatures}>Features</a>
             <Link to="/about" className="nav-link">About</Link>
             <Link to="/contact" className="nav-link">Contact</Link>
             <Link to="/login" className="nav-btn nav-btn-login">Login</Link>
@@ -96,7 +102,7 @@ export default function LandingPage() {
                 Get Started
                 <span className="btn-arrow">→</span>
               </Link>
-              <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Learn More</button>
+              <button className="btn btn-secondary" onClick={scrollToFeatures}>Learn More</button>
             </div>
           </div>
 
@@ -191,7 +197,8 @@ export default function LandingPage() {
           </div>
           <div className="footer-section">
             <h4>Quick Links</h4>
-            <button className="btn btn-secondary" onClick={e => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>Features</button>
+            {/* FIX: was <button className="btn btn-secondary"> — now matches About/Login footer link style */}
+            <a href="#features" onClick={scrollToFeatures}>Features</a>
             <Link to="/about">About</Link>
             <Link to="/login">Login</Link>
           </div>
