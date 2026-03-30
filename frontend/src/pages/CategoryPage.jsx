@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -254,6 +255,8 @@ const styles = `
   @media(max-width:768px){
     .cat-navbar { padding:0 16px; }
     .cat-nav-links,.cat-logout,.cat-icon-btn { display:none; }
+    .cat-drawer .cat-logout { display:flex !important; }
+    .cat-drawer .cat-icon-btn { display:flex !important; }
     .cat-hamburger { display:flex; }
     .cat-hero { padding:36px 16px 88px; }
     .cat-stats-strip { padding:0 16px; }
@@ -275,7 +278,7 @@ const CATEGORY_META = {
 
 const SORT_OPTIONS = ["Default", "Price: Low to High", "Price: High to Low", "Top Rated"];
 
-const BASE_URL = "http://127.0.0.1:5000";
+
 
 export default function CategoryPage() {
   const { category } = useParams();
@@ -286,10 +289,17 @@ export default function CategoryPage() {
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [darkMode,  setDarkMode]  = useState(() => localStorage.getItem("theme") !== "light");
 
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/api/courses`)
+    fetch(`${API}/api/courses`)
       .then(r => r.json())
       .then(data => setCourses(data));
   }, []);

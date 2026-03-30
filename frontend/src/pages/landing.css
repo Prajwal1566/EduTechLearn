@@ -175,6 +175,127 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* ==================== HAMBURGER MENU ==================== */
+
+/* Hidden on desktop, shown on mobile */
+.mobile-nav-right {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Login btn visible on mobile (outside hamburger) */
+.mobile-login {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  z-index: 1001;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ham-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animate to X when open */
+.hamburger.open .ham-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open .ham-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open .ham-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile dropdown menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(20, 0, 18, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: max-height 0.35s ease, padding 0.3s ease;
+  padding: 0 20px;
+}
+
+.mobile-menu.mobile-menu-open {
+  max-height: 420px;
+  padding: 10px 20px 20px;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 13px 0;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-nav-link:last-child {
+  border-bottom: flex;
+}
+
+.mobile-nav-link:hover {
+  color: var(--white);
+  padding-left: 6px;
+}
+
+.mobile-signup-link {
+  margin-top: 10px;
+  padding: 12px 0 !important;
+  color: var(--white) !important;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+  border-radius: 10px;
+  text-align: center;
+  border-bottom: none !important;
+}
+
+.mobile-signup-link:hover {
+  padding-left: 0 !important;
+  opacity: 0.9;
+}
+
+/* Transparent overlay to close menu on outside tap */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: transparent;
+}
+
 /* ==================== HERO SECTION ==================== */
 .hero {
   background: linear-gradient(180deg, #4a0033, #5a003d);
@@ -656,7 +777,7 @@ body {
 }
 
 /* Large Tablets & Small Laptops (768px) */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   * {
     scroll-behavior: smooth;
   }
@@ -665,13 +786,32 @@ body {
     font-size: 14px;
   }
 
+  /* ── Navbar: single row with hamburger ── */
   .navbar {
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 1rem;
   }
 
   .navbar-content {
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  /* Hide desktop nav links */
+  .nav-links {
+    display: none !important;
+  }
+
+  /* Show hamburger + mobile login */
+  .mobile-nav-right {
+    display: flex !important;
+  }
+
+  /* Show mobile dropdown */
+  .mobile-menu {
+    display: flex;
   }
 
   .logo {
@@ -683,29 +823,23 @@ body {
     font-size: 1.5rem;
   }
 
-  .nav-links {
-    gap: 0.8rem;
-    font-size: 0.85rem;
-    flex-wrap: wrap;
-    width: 100%;
-    order: 3;
-    justify-content: center;
-  }
-
-  .nav-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
-  }
-
+  /* ── Hero ── */
   .hero {
-    padding: 100px 1rem 1rem;
-    min-height: auto;
+    padding: 90px 1rem 2rem;
+    min-height: 100svh;
   }
 
   .hero-content {
     grid-template-columns: 1fr;
     gap: 2rem;
     max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-title {
@@ -716,38 +850,44 @@ body {
   .hero-subtitle {
     font-size: 1.05rem;
     margin-bottom: 1.5rem;
+    max-width: 90%;
   }
 
   .hero-buttons {
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
   }
 
   .btn {
     padding: 0.9rem 1.8rem;
     font-size: 0.95rem;
     width: 100%;
+    max-width: 320px;
   }
 
   .hero-image {
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .floating-card {
-    min-width: 160px;
-    padding: 1.5rem 2rem;
-    width: 100%;
-    max-width: 300px;
+    min-width: 130px;
+    padding: 1.2rem 1.5rem;
+    width: auto;
+    max-width: 160px;
+    flex: 1 1 130px;
   }
 
   .card-icon {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
 
   .card-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .scroll-indicator {
@@ -765,8 +905,8 @@ body {
   }
 
   .features-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
   }
 
   .section-title {
@@ -847,13 +987,14 @@ body {
   }
 
   .navbar {
-    padding: 0.7rem 0.8rem;
+    padding: 0.6rem 0.8rem;
   }
 
   .navbar-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
   }
 
   .logo {
@@ -865,11 +1006,9 @@ body {
     font-size: 1.3rem;
   }
 
+  /* Desktop nav still hidden */
   .nav-links {
-    width: 100%;
-    justify-content: space-around;
-    gap: 0.5rem;
-    font-size: 0.75rem;
+    display: none !important;
   }
 
   .nav-btn {
@@ -1084,12 +1223,14 @@ button.nav-link,
   }
 
   .navbar {
-    padding: 0.6rem;
+    padding: 0.5rem 0.6rem;
   }
 
   .navbar-content {
-    flex-direction: column;
-    gap: 0.6rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
   }
 
   .logo {
@@ -1101,8 +1242,9 @@ button.nav-link,
     font-size: 1.1rem;
   }
 
+  /* Desktop nav still hidden */
   .nav-links {
-    font-size: 0.65rem;
+    display: none !important;
   }
 
   .nav-btn {

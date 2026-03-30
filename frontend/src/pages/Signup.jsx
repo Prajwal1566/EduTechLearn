@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../asset/logow.png";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -472,7 +473,7 @@ export default function Signup() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/signup", {
+      const res = await fetch(`${API}/api/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

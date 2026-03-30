@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -241,7 +242,7 @@ export default function PaymentSuccess() {
     const key = `purchased_${user?.id}_${location.state?.courseId}`;
     if (user && location.state?.courseId && !sessionStorage.getItem(key)) {
       sessionStorage.setItem(key, "true");
-      fetch("http://127.0.0.1:5000/api/purchase", {
+      fetch(`${API}/api/purchase`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, course_id: location.state.courseId }),
@@ -250,7 +251,7 @@ export default function PaymentSuccess() {
 
     /* Fetch course name if we have an id */
     if (location.state?.courseId) {
-      fetch(`http://127.0.0.1:5000/api/courses/${location.state.courseId}`)
+      fetch(`${API}/api/courses/${location.state.courseId}`)
         .then(r => r.json())
         .then(d => { if (d?.title) setCourseName(d.title); })
         .catch(() => {});

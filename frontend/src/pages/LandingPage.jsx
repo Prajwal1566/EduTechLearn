@@ -8,6 +8,14 @@ export default function LandingPage() {
   const [courses, setCourses] = useState(0);
   const [successRate, setSuccessRate] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
 
   useEffect(() => {
     // Start animation when component mounts
@@ -52,8 +60,11 @@ export default function LandingPage() {
 
   const scrollToFeatures = (e) => {
     e.preventDefault();
+    setMenuOpen(false);
     document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="landing-container">
@@ -73,16 +84,42 @@ export default function LandingPage() {
             </span>
             <span className="logo-text">EDU-TECH</span>
           </div>
+
+          {/* Desktop nav links — hidden on mobile via CSS */}
           <div className="nav-links">
-            {/* FIX: was <button className="btn btn-secondary"> — now matches About/Contact style */}
             <a href="#features" className="nav-link" onClick={scrollToFeatures}>Features</a>
             <Link to="/about" className="nav-link">About</Link>
             <Link to="/contact" className="nav-link">Contact</Link>
             <Link to="/login" className="nav-btn nav-btn-login">Login</Link>
             <Link to="/signup" className="nav-btn nav-btn-signup">Sign Up</Link>
           </div>
+
+          {/* Mobile: Login button + Hamburger — shown on mobile via CSS */}
+          <div className="mobile-nav-right">
+            <Link to="/login" className="nav-btn nav-btn-login mobile-login">Login</Link>
+            <button
+              className={`hamburger${menuOpen ? " open" : ""}`}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+            >
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile dropdown menu */}
+        <div className={`mobile-menu${menuOpen ? " mobile-menu-open" : ""}`}>
+          <a href="#features" className="mobile-nav-link" onClick={scrollToFeatures}>Features</a>
+          <Link to="/about" className="mobile-nav-link" onClick={closeMenu}>About</Link>
+          <Link to="/contact" className="mobile-nav-link" onClick={closeMenu}>Contact</Link>
+          <Link to="/signup" className="mobile-nav-link mobile-signup-link" onClick={closeMenu}>Sign Up</Link>
         </div>
       </nav>
+
+      {/* Overlay to close menu on outside tap */}
+      {menuOpen && <div className="menu-overlay" onClick={closeMenu}></div>}
 
       {/* Hero Section */}
       <section className="hero">

@@ -27,7 +27,7 @@ import About from "./pages/About";
 
 import { Navigate } from "react-router-dom";
 
-const BASE_URL = "http://127.0.0.1:5000";
+import API from "./api";
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
   const admin = JSON.parse(localStorage.getItem("admin") || sessionStorage.getItem("admin") || "null");
@@ -54,7 +54,7 @@ function AdminPanel() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch(`${BASE_URL}/api/courses`)
+    fetch(`${API}/api/courses`)
       .then(res => res.json())
       .then(data => { setCourses(data); setLoading(false); })
       .catch(() => setLoading(false));
@@ -70,7 +70,7 @@ function AdminPanel() {
       return;
     }
 
-    const resAdd = await fetch(`${BASE_URL}/api/admin/add-course`, {
+    const resAdd = await fetch(`${API}/api/admin/add-course`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function AdminPanel() {
       return;
     }
 
-    const res = await fetch(`${BASE_URL}/api/courses`);
+    const res = await fetch(`${API}/api/courses`);
     const data = await res.json();
     setCourses(data);
     setActiveTab("dashboard");
@@ -104,7 +104,7 @@ function AdminPanel() {
     return;
   }
 
-  const resDel = await fetch(`${BASE_URL}/api/admin/course/${id}`, {
+  const resDel = await fetch(`${API}/api/admin/course/${id}`, {
     method: "DELETE",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -116,7 +116,7 @@ function AdminPanel() {
     return;
   }
 
-  const res = await fetch(`${BASE_URL}/api/courses`);
+  const res = await fetch(`${API}/api/courses`);
   const data = await res.json();
   setCourses(data);
 };

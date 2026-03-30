@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -356,6 +357,7 @@ const styles = `
     .hm-navbar { padding:0 16px; }
     .hm-nav-links { display:none; }
     .logout-btn { display:none; }
+    .mobile-menu .logout-btn { display:flex !important; }
     .hamburger { display:flex; }
     .hm-hero { padding:44px 16px 100px; }
     .hm-stats-band { padding:0 16px; }
@@ -373,7 +375,7 @@ const styles = `
   }
 `;
 
-const BASE_URL = "http://127.0.0.1:5000";
+
 
 export default function Home({ onAddWishlist }) {
   const navigate = useNavigate();
@@ -383,8 +385,15 @@ export default function Home({ onAddWishlist }) {
   const [activeCategory, setActiveCategory] = useState("All");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Close mobile menu on scroll
   useEffect(() => {
-    fetch(`${BASE_URL}/api/courses`)
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    fetch(`${API}/api/courses`)
       .then(res => res.json())
       .then(data => setCourses(data));
 
@@ -452,8 +461,8 @@ export default function Home({ onAddWishlist }) {
           <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
           <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
           <div className="mobile-divider" />
-          <div className="mobile-actions">
-            <button className="logout-btn" style={{ flex:1, justifyContent:"center" }} onClick={handleLogout}>⏻ Logout</button>
+          <div className="mobile-actions" style={{ width: "100%" }}>
+            <button className="logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>⏻ Logout</button>
           </div>
         </div>
 

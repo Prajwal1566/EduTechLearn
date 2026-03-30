@@ -3,7 +3,7 @@ import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://127.0.0.1:5000";
+import API from "../api";
 
 export default function Wishlist() {
   const navigate = useNavigate();
@@ -12,6 +12,13 @@ export default function Wishlist() {
   const [wishlistIds, setWishlistIds] = useState([]);
   const [menuOpen, setMenuOpen]      = useState(false);
   const [fetchError, setFetchError]  = useState(false);
+
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
 
   useEffect(() => {
     // FIX 1: Check "token" (consistent with ProtectedRoute in App.js)
@@ -27,7 +34,7 @@ export default function Wishlist() {
     setWishlistIds(saved);
 
     // FIX 3: Added error handling so a failed fetch doesn't silently freeze navigation
-    fetch(`${BASE_URL}/api/courses`)
+    fetch(`${API}/api/courses`)
       .then(res => {
         if (!res.ok) throw new Error("Server error");
         return res.json();
@@ -94,8 +101,8 @@ export default function Wishlist() {
         <Link to="/wishlist" className="active" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
         <Link to="/profile"    onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
         <div className="wl-drawer-divider" />
-        <div className="wl-drawer-row">
-          <button className="wl-logout-btn" style={{ flex:1, justifyContent:"center" }} onClick={handleLogout}>
+        <div className="wl-drawer-row" style={{ width: "100%" }}>
+          <button className="wl-logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>
             ⏻ Logout
           </button>
         </div>

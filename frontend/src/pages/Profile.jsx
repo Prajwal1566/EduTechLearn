@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -370,6 +371,7 @@ const styles = `
     .pr-navbar { padding: 0 16px; }
     .pr-nav-links { display: none; }
     .logout-btn { display: none; }
+    .mobile-menu .logout-btn { display: flex !important; }
     .hamburger { display: flex; }
     .pr-hero { padding: 28px 16px 84px; }
     .pr-hero-name { font-size: 20px; }
@@ -384,7 +386,7 @@ const styles = `
   }
 `;
 
-const BASE_URL = "http://127.0.0.1:5000";
+
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -396,14 +398,21 @@ export default function Profile() {
   const [completed, setCompleted] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
   useEffect(() => {
     if (!user) { navigate("/login"); return; }
 
-    fetch(`${BASE_URL}/api/profile/${user.id}`)
+    fetch(`${API}/api/profile/${user.id}`)
       .then(r => r.json()).then(d => setProfile(d))
       .catch(e => console.error(e));
 
-    fetch(`${BASE_URL}/api/my-courses/${user.id}`)
+    fetch(`${API}/api/my-courses/${user.id}`)
       .then(r => r.json()).then(data => {
         setMyCourses(data);
         setInProgress(data.filter(c => c.completed === 0));
@@ -418,7 +427,7 @@ export default function Profile() {
     : "?";
 
   const avatarSrc = profile?.profile_image
-    ? (profile.profile_image.startsWith("http") ? profile.profile_image : BASE_URL + profile.profile_image)
+    ? (profile.profile_image.startsWith("http") ? profile.profile_image : API + profile.profile_image)
     : null;
 
   return (
@@ -472,8 +481,8 @@ export default function Profile() {
           <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
           <Link to="/profile" className="active" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
           <div className="mobile-menu-divider" />
-          <div className="mobile-actions">
-            <button className="logout-btn" style={{ flex: 1, justifyContent: "center" }} onClick={handleLogout}>
+          <div className="mobile-actions" style={{ width: "100%" }}>
+            <button className="logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>
               ⏻ Logout
             </button>
           </div>
@@ -613,7 +622,7 @@ export default function Profile() {
                   <span className="cert-badge">COMPLETED</span>
                   <button
                     className="download-btn"
-                    onClick={() => window.open(`${BASE_URL}/api/certificate/${user.id}/${course.id}`, "_blank")}
+                    onClick={() => window.open(`${API}/api/certificate/${user.id}/${course.id}`, "_blank")}
                   >
                     ⬇ Download
                   </button>

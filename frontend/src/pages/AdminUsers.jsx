@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://127.0.0.1:5000";
+import API from "../api";
 
 export default function AdminUsers() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function AdminUsers() {
   // ── same logic as original ──
   const fetchUsers = () => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-    fetch(`${BASE_URL}/api/admin/users`, {
+    fetch(`${API}/api/admin/users`, {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -35,7 +35,7 @@ export default function AdminUsers() {
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-    await fetch(`${BASE_URL}/api/admin/delete-user/${id}`, {
+    await fetch(`${API}/api/admin/delete-user/${id}`, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${token}` }
     });

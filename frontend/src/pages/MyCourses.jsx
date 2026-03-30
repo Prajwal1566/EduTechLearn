@@ -3,7 +3,7 @@ import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://127.0.0.1:5000";
+import API from "../api";
 
 export default function MyCourses() {
   const navigate = useNavigate();
@@ -14,9 +14,16 @@ export default function MyCourses() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
   useEffect(() => {
     if (!userId) { navigate("/login"); return; }
-    fetch(`${BASE_URL}/api/my-courses/${userId}`)
+    fetch(`${API}/api/my-courses/${userId}`)
       .then(res => res.json())
       .then(data => { setCourses(data); setLoading(false); })
       .catch(() => setLoading(false));
@@ -68,8 +75,8 @@ export default function MyCourses() {
         <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
         <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
         <div className="mc-drawer-divider" />
-        <div className="mc-drawer-row">
-          <button className="mc-logout-btn" style={{ flex: 1, justifyContent: "center" }} onClick={handleLogout}>
+        <div className="mc-drawer-row" style={{ width: "100%" }}>
+          <button className="mc-logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>
             ⏻ Logout
           </button>
         </div>
@@ -188,7 +195,7 @@ export default function MyCourses() {
                       {/* Download Certificate */}
                       <button
                         className="mc-cert-btn"
-                        onClick={() => window.open(`${BASE_URL}/api/certificate/${user.id}/${course.id}`)}
+                        onClick={() => window.open(`${API}/api/certificate/${user.id}/${course.id}`)}
                       >
                         ⬇ Download Certificate
                       </button>

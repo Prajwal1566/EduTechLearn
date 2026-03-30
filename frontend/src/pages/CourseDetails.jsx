@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -374,6 +375,7 @@ const styles = `
   @media(max-width:768px){
     .cd-navbar { padding:0 16px; }
     .cd-nav-links,.logout-btn { display:none; }
+    .mobile-menu .logout-btn { display:flex !important; }
     .hamburger { display:flex; }
     .cd-main { grid-template-columns:1fr; }
     .cd-right { padding-top:0; }
@@ -387,7 +389,7 @@ const styles = `
   }
 `;
 
-const BASE_URL = "http://127.0.0.1:5000";
+
 
 export default function CourseDetails() {
   const { id }    = useParams();
@@ -403,11 +405,18 @@ export default function CourseDetails() {
   const [menuOpen,     setMenuOpen]     = useState(false);
   const [voucher,      setVoucher]      = useState("");
 
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => { if (menuOpen) setMenuOpen(false); };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
   const handleLogout = () => { localStorage.removeItem("user"); navigate("/"); };
 
   // Fetch course details
   useEffect(() => {
-    fetch(`${BASE_URL}/api/courses`)
+    fetch(`${API}/api/courses`)
       .then(r => r.json())
       .then(data => {
         const found = data.find(c => String(c.id) === String(id));
@@ -418,7 +427,7 @@ export default function CourseDetails() {
   // Check purchase
   useEffect(() => {
     if (!userId) return;
-    fetch(`${BASE_URL}/api/my-courses/${userId}`)
+    fetch(`${API}/api/my-courses/${userId}`)
       .then(r => r.json())
       .then(data => {
         const found = data.find(c => String(c.id) === String(id));
@@ -428,7 +437,7 @@ export default function CourseDetails() {
   }, [id, userId]);
 
   const handleMarkComplete = async () => {
-    await fetch(`${BASE_URL}/api/update-progress`, {
+    await fetch(`${API}/api/update-progress`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: user.id, course_id: course.id, progress: 100 }),
@@ -633,7 +642,7 @@ export default function CourseDetails() {
 
                 {isPurchased && isCompleted && (
                   <button className="cd-cta-green" onClick={() =>
-                    window.open(`${BASE_URL}/api/certificate/${user.id}/${course.id}`, "_blank")
+                    window.open(`${API}/api/certificate/${user.id}/${course.id}`, "_blank")
                   }>
                     ⬇ Download Certificate
                   </button>

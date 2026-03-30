@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -275,7 +276,7 @@ export default function AdminLogin() {
   setError("");
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/admin/login", {
+    const res = await fetch(`${API}/api/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

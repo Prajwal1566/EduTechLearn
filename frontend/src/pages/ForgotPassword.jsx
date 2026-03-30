@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../asset/logow.png";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -442,7 +443,7 @@ export default function ForgotPassword() {
     if (!email) { setError("Please enter your email"); return; }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/send-otp", {
+      const res = await fetch(`${API}/api/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -459,7 +460,7 @@ export default function ForgotPassword() {
     if (otpString.length < 6) { setError("Please enter the 6-digit OTP"); return; }
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/verify-otp", {
+      const res = await fetch(`${API}/api/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: otpString }),
@@ -478,7 +479,7 @@ export default function ForgotPassword() {
     if (password.length < 6) { setError("Password must be at least 6 characters"); return; }
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/reset-password", {
+      const res = await fetch(`${API}/api/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../api";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -508,7 +509,7 @@ export default function EditProfile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/api/profile/${user.id}`)
+    fetch(`${API}/api/profile/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setName(data.name || "");
@@ -516,7 +517,7 @@ export default function EditProfile() {
         setPreview(data.profile_image || "");
         setLoading(false);
        if (data.profile_image) {
-  const fullUrl = "http://127.0.0.1:5000" + data.profile_image;
+  const fullUrl = API + data.profile_image;
   setProfileImage(fullUrl);
   setPreview(fullUrl);
 } else {
@@ -545,7 +546,7 @@ export default function EditProfile() {
       formData.append("profile_image", imageFile);
     }
 
-    await fetch(`http://127.0.0.1:5000/api/profile/update/${user.id}`, {
+    await fetch(`${API}/api/profile/update/${user.id}`, {
       method: "POST",
       body: formData,
     });
