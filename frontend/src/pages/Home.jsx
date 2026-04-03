@@ -90,49 +90,48 @@ const styles = `
   .light .logout-btn { border-color:rgba(200,0,0,.13); background:rgba(200,0,0,.04); color:rgba(170,0,0,.65); }
 
   /* Hamburger */
-  .hamburger {
+  .hm-hamburger {
     display: none;
     flex-direction: column; justify-content: center; align-items: center; gap: 5px;
     width: 36px; height: 36px; border-radius: 9px;
     border: 1px solid rgba(255,255,255,.1);
     background: rgba(255,255,255,.05);
-    cursor: pointer; padding: 0; transition: all .2s;
+    cursor: pointer; padding: 0; transition: all .2s; flex-shrink: 0;
   }
-  .hamburger:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); }
-  .light .hamburger { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); }
-  .hamburger span { display:block; width:18px; height:2px; background:rgba(255,255,255,.7); border-radius:99px; transition:all .3s ease; }
-  .light .hamburger span { background:#4C003E; }
-  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .hm-hamburger:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); }
+  .light .hm-hamburger { border-color:rgba(76,0,62,.13); background:rgba(76,0,62,.05); }
+  .hm-hamburger span { display:block; width:18px; height:2px; background:rgba(255,255,255,.7); border-radius:99px; transition:all .3s ease; }
+  .light .hm-hamburger span { background:#4C003E; }
+  .hm-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hm-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+  .hm-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
   /* Mobile drawer */
-  .mobile-menu {
+  .hm-drawer {
     display: none; position: fixed;
     top: 62px; left:0; right:0; z-index:199;
     background: rgba(18,0,16,0.97);
     backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(255,255,255,.07);
+    border-bottom: 1px solid rgba(255,255,255,.08);
     padding: 14px 18px 18px;
     flex-direction: column; gap: 4px;
-    animation: slideDown .22s ease;
+    animation: hmSlide .22s ease;
   }
-  .light .mobile-menu { background:rgba(245,240,245,0.98); border-bottom-color:rgba(76,0,62,.1); }
-  @keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
-  .mobile-menu.open { display:flex; }
-  .mobile-menu a {
+  .light .hm-drawer { background:rgba(245,240,245,0.98); border-bottom-color:rgba(76,0,62,.1); }
+  @keyframes hmSlide { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+  .hm-drawer.open { display:flex; }
+  .hm-drawer a {
     padding:11px 14px; border-radius:10px;
     font-size:14px; font-weight:500;
-    color:rgba(255,255,255,.62); text-decoration:none;
+    color:rgba(255,255,255,.65); text-decoration:none;
     transition:all .2s; border:1px solid transparent;
   }
-  .mobile-menu a:hover, .mobile-menu a.active { color:#fff; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.08); }
-  .light .mobile-menu a { color:rgba(76,0,62,.62); }
-  .light .mobile-menu a:hover, .light .mobile-menu a.active { color:#4C003E; background:rgba(76,0,62,.08); border-color:rgba(76,0,62,.1); }
-  .mobile-divider { height:1px; background:rgba(255,255,255,.07); margin:8px 0; }
-  .light .mobile-divider { background:rgba(76,0,62,.08); }
-  .mobile-actions { display:flex; gap:8px; margin-top:4px; }
-  .mobile-actions button { flex:1; justify-content:center; }
+  .hm-drawer a:hover, .hm-drawer a.active { color:#fff; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.08); }
+  .light .hm-drawer a { color:rgba(76,0,62,.62); }
+  .light .hm-drawer a:hover, .light .hm-drawer a.active { color:#4C003E; background:rgba(76,0,62,.08); border-color:rgba(76,0,62,.1); }
+  .hm-drawer-divider { height:1px; background:rgba(255,255,255,.07); margin:8px 0; }
+  .light .hm-drawer-divider { background:rgba(76,0,62,.08); }
+  .hm-drawer-row { display:flex; gap:8px; margin-top:4px; }
 
   /* ── HERO ── */
   .hm-hero {
@@ -146,7 +145,6 @@ const styles = `
     background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size:200px; opacity:.03; pointer-events:none;
   }
-  /* Decorative circles inside hero */
   .hm-hero::after {
     content:''; position:absolute;
     width:500px; height:500px; border-radius:50%;
@@ -301,17 +299,13 @@ const styles = `
   .hm-see-all:hover { background:rgba(153,3,125,.1); border-color:rgba(153,3,125,.2); }
 
   /* Course grid */
-.hm-course-grid {
+  .hm-course-grid {
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
     gap:3.4rem;
     align-items: start;
   }
-
-  .hm-course-grid > * {
-    min-width: 0;
-    width: 100%;
-  }
+  .hm-course-grid > * { min-width: 0; width: 100%; }
 
   /* ── FOOTER ── */
   .hm-footer {
@@ -357,8 +351,8 @@ const styles = `
     .hm-navbar { padding:0 16px; }
     .hm-nav-links { display:none; }
     .logout-btn { display:none; }
-    .mobile-menu .logout-btn { display:flex !important; }
-    .hamburger { display:flex; }
+    .hm-drawer .logout-btn { display:flex !important; }
+    .hm-hamburger { display:flex; }
     .hm-hero { padding:44px 16px 100px; }
     .hm-stats-band { padding:0 16px; }
     .hm-stats-card { grid-template-columns:repeat(2,1fr); }
@@ -370,12 +364,10 @@ const styles = `
     .hm-footer { padding:28px 16px 20px; }
   }
   @media(min-width:769px){
-    .hamburger { display:none !important; }
-    .mobile-menu { display:none !important; }
+    .hm-hamburger { display:none !important; }
+    .hm-drawer { display:none !important; }
   }
 `;
-
-
 
 export default function Home({ onAddWishlist }) {
   const navigate = useNavigate();
@@ -448,21 +440,31 @@ export default function Home({ onAddWishlist }) {
             <button className="logout-btn" onClick={handleLogout}>
               <span>⏻</span> Logout
             </button>
-            <button className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+            <button
+              className={`hm-hamburger ${menuOpen ? "open" : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
               <span /><span /><span />
             </button>
           </div>
         </nav>
 
-        {/* Mobile drawer */}
-        <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        {/* ── MOBILE DRAWER ── */}
+        <div className={`hm-drawer ${menuOpen ? "open" : ""}`}>
           <Link to="/home" className="active" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
           <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
           <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
           <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
-          <div className="mobile-divider" />
-          <div className="mobile-actions" style={{ width: "100%" }}>
-            <button className="logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>⏻ Logout</button>
+          <div className="hm-drawer-divider" />
+          <div className="hm-drawer-row" style={{ width: "100%" }}>
+            <button
+              className="logout-btn"
+              style={{ width: "100%", justifyContent: "center" }}
+              onClick={handleLogout}
+            >
+              ⏻ Logout
+            </button>
           </div>
         </div>
 
@@ -533,37 +535,30 @@ export default function Home({ onAddWishlist }) {
         {/* ── COURSE SECTIONS ── */}
         <div className="hm-content">
           {sections.map(({ title, category, data }) => (
-              data.length > 0 && (       
-                <div className="hm-section" key={category}>
-              <div className="hm-section-header">
-              <div className="hm-section-title">
-              {title}
-              <span className="hm-section-count">
-              ({data.length})
-              </span>
+            data.length > 0 && (
+              <div className="hm-section" key={category}>
+                <div className="hm-section-header">
+                  <div className="hm-section-title">
+                    {title}
+                    <span className="hm-section-count">({data.length})</span>
+                  </div>
+                  {data.length > 3 && (
+                    <Link to={`/category/${category}`} className="hm-see-all">
+                      See all →
+                    </Link>
+                  )}
+                </div>
+                <div className="hm-course-grid">
+                  {data.slice(0, 3).map(course => (
+                    <CourseCard
+                      key={course.id}
+                      course={course}
+                      onAddWishlist={onAddWishlist}
+                    />
+                  ))}
+                </div>
               </div>
-
-          {data.length > 3 && (
-            <Link 
-              to={`/category/${category}`} 
-              className="hm-see-all"
-            >
-              See all →
-            </Link>
-          )}
-        </div>
-
-        <div className="hm-course-grid">
-          {data.slice(0, 3).map(course => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              onAddWishlist={onAddWishlist}
-            />
-          ))}
-        </div>
-        </div>
-          )
+            )
           ))}
 
           {filtered.length === 0 && (
