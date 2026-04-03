@@ -37,7 +37,7 @@ app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", secrets.token_hex(32)
 jwt = JWTManager(app)
 
 # Restrict CORS to the React dev server (update ALLOWED_ORIGINS in production)
-_allowed_origins = ["http://localhost:3000", "https://edu-tech-learn.vercel.app"]
+_allowed_origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,https://edu-tech-learn.vercel.app/").split(",")]
 CORS(app, origins=_allowed_origins, supports_credentials=True)
 
 DB_NAME = "database.db"
