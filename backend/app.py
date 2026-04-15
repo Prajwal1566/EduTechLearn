@@ -10,7 +10,7 @@ import secrets
 from flask import send_file
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
-from datetime import date
+from datetime import date, timedelta
 import re
 from werkzeug.utils import secure_filename
 import random
@@ -34,6 +34,7 @@ def safe_filename(text):
 app = Flask(__name__)
 # Load JWT secret from environment variable; fall back to a random key per process
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", secrets.token_hex(32))
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=1)
 jwt = JWTManager(app)
 
 # Restrict CORS to the React dev server (update ALLOWED_ORIGINS in production)
