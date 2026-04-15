@@ -68,32 +68,36 @@ const styles = `
   .logout-btn:hover { background:rgba(255,60,60,.14); color:#ff8888; }
 
   /* Hamburger */
-  .hamburger {
+  .cd-hamburger {
     display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
     width:36px; height:36px; border-radius:9px;
     border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.05);
-    cursor:pointer; padding:0; transition:all .2s;
+    cursor:pointer; padding:0; transition:all .2s; flex-shrink:0;
   }
-  .hamburger:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); }
-  .hamburger span { display:block; width:18px; height:2px; background:rgba(255,255,255,.7); border-radius:99px; transition:all .3s; }
-  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity:0; }
-  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .cd-hamburger:hover { background:rgba(153,3,125,.2); border-color:rgba(153,3,125,.4); }
+  .cd-hamburger span { display:block; width:18px; height:2px; background:rgba(255,255,255,.7); border-radius:99px; transition:all .3s ease; }
+  .cd-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .cd-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+  .cd-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
-  .mobile-menu {
+  /* Mobile drawer */
+  .cd-drawer {
     display:none; position:fixed; top:62px; left:0; right:0; z-index:199;
     background:rgba(18,0,16,0.97); backdrop-filter:blur(24px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.08);
     padding:14px 18px 18px; flex-direction:column; gap:4px;
-    animation:slideDown .22s ease;
+    animation:cdSlide .22s ease;
   }
-  @keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
-  .mobile-menu.open { display:flex; }
-  .mobile-menu a { padding:11px 14px; border-radius:10px; font-size:14px; font-weight:500; color:rgba(255,255,255,.62); text-decoration:none; transition:all .2s; }
-  .mobile-menu a:hover { color:#fff; background:rgba(255,255,255,.07); }
-  .mob-divider { height:1px; background:rgba(255,255,255,.07); margin:8px 0; }
-  .mob-actions { display:flex; gap:8px; margin-top:4px; }
-  .mob-actions button { flex:1; justify-content:center; }
+  @keyframes cdSlide { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+  .cd-drawer.open { display:flex; }
+  .cd-drawer a {
+    padding:11px 14px; border-radius:10px; font-size:14px; font-weight:500;
+    color:rgba(255,255,255,.65); text-decoration:none;
+    transition:all .2s; border:1px solid transparent;
+  }
+  .cd-drawer a:hover, .cd-drawer a.active { color:#fff; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.08); }
+  .cd-drawer-divider { height:1px; background:rgba(255,255,255,.07); margin:8px 0; }
+  .cd-drawer-row { display:flex; gap:8px; margin-top:4px; }
 
   /* ── VIDEO HERO ── */
   .cd-video-hero {
@@ -374,9 +378,10 @@ const styles = `
   /* Responsive */
   @media(max-width:768px){
     .cd-navbar { padding:0 16px; }
-    .cd-nav-links,.logout-btn { display:none; }
-    .mobile-menu .logout-btn { display:flex !important; }
-    .hamburger { display:flex; }
+    .cd-nav-links { display:none; }
+    .logout-btn { display:none; }
+    .cd-drawer .logout-btn { display:flex !important; }
+    .cd-hamburger { display:flex; }
     .cd-main { grid-template-columns:1fr; }
     .cd-right { padding-top:0; }
     .cd-price-card { position:static; }
@@ -384,8 +389,8 @@ const styles = `
     .cd-footer { padding:28px 16px 20px; }
   }
   @media(min-width:769px){
-    .hamburger { display:none !important; }
-    .mobile-menu { display:none !important; }
+    .cd-hamburger { display:none !important; }
+    .cd-drawer { display:none !important; }
   }
 `;
 
@@ -481,21 +486,31 @@ export default function CourseDetails() {
               <Link to="/profile">Profile</Link>
             </div>
             <button className="logout-btn" onClick={handleLogout}><span>⏻</span> Logout</button>
-            <button className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+            <button
+              className={`cd-hamburger ${menuOpen ? "open" : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
               <span /><span /><span />
             </button>
           </div>
         </nav>
 
-        {/* Mobile drawer */}
-        <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        {/* ── MOBILE DRAWER ── */}
+        <div className={`cd-drawer ${menuOpen ? "open" : ""}`}>
           <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
           <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
           <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
           <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
-          <div className="mob-divider" />
-          <div className="mob-actions">
-            <button className="logout-btn" style={{flex:1, justifyContent:"center"}} onClick={handleLogout}>⏻ Logout</button>
+          <div className="cd-drawer-divider" />
+          <div className="cd-drawer-row" style={{ width: "100%" }}>
+            <button
+              className="logout-btn"
+              style={{ width: "100%", justifyContent: "center" }}
+              onClick={handleLogout}
+            >
+              ⏻ Logout
+            </button>
           </div>
         </div>
 

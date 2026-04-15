@@ -16,10 +16,6 @@ const styles = `
     overflow-x: hidden;
   }
 
-  .ep-root.light {
-    background: #f5f0f5;
-  }
-
   /* Orbs */
   .orb {
     position: fixed;
@@ -41,8 +37,6 @@ const styles = `
     bottom: -60px; right: -60px;
     animation-delay: -4s;
   }
-  .light .orb-1 { background: radial-gradient(circle, #cc05a015, transparent); }
-  .light .orb-2 { background: radial-gradient(circle, #99037d10, transparent); }
 
   @keyframes floatOrb {
     0%,100% { transform: translate(0,0) scale(1); }
@@ -62,10 +56,6 @@ const styles = `
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
-  .light .ep-navbar {
-    background: rgba(245,240,245,0.85);
-    border-bottom: 1px solid rgba(76,0,62,0.1);
-  }
 
   .ep-navbar-brand {
     font-family: 'Syne', sans-serif;
@@ -78,7 +68,6 @@ const styles = `
     gap: 10px;
     text-decoration: none;
   }
-  .light .ep-navbar-brand { color: #2d002a; }
 
   .ep-navbar-logo {
     width: 32px; height: 32px;
@@ -92,24 +81,6 @@ const styles = `
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-
-  .theme-toggle {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.7);
-    cursor: pointer;
-    font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .theme-toggle:hover { background: rgba(153,3,125,0.2); border-color: rgba(153,3,125,0.4); }
-  .light .theme-toggle {
-    border-color: rgba(76,0,62,0.15);
-    background: rgba(76,0,62,0.05);
-    color: #4C003E;
   }
 
   .back-btn {
@@ -127,12 +98,6 @@ const styles = `
     text-decoration: none;
   }
   .back-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .light .back-btn {
-    border-color: rgba(76,0,62,0.15);
-    background: rgba(76,0,62,0.05);
-    color: #4C003E;
-  }
-  .light .back-btn:hover { background: rgba(76,0,62,0.1); }
 
   /* Main layout */
   .ep-main {
@@ -150,14 +115,12 @@ const styles = `
     color: #fff;
     margin-bottom: 4px;
   }
-  .light .ep-page-title { color: #1a001a; }
 
   .ep-page-sub {
     font-size: 13px;
     color: rgba(255,255,255,0.4);
     margin-bottom: 32px;
   }
-  .light .ep-page-sub { color: rgba(76,0,62,0.5); }
 
   /* Card */
   .ep-card {
@@ -172,14 +135,6 @@ const styles = `
   .ep-card:hover {
     box-shadow: 0 8px 40px rgba(153,3,125,0.12);
   }
-  .light .ep-card {
-    background: #fff;
-    border: 1px solid rgba(76,0,62,0.1);
-    box-shadow: 0 2px 16px rgba(76,0,62,0.06);
-  }
-  .light .ep-card:hover {
-    box-shadow: 0 8px 32px rgba(76,0,62,0.1);
-  }
 
   .ep-card-header {
     padding: 20px 24px 16px;
@@ -188,7 +143,6 @@ const styles = `
     align-items: center;
     gap: 10px;
   }
-  .light .ep-card-header { border-bottom-color: rgba(76,0,62,0.08); }
 
   .ep-card-icon {
     width: 34px; height: 34px;
@@ -198,9 +152,6 @@ const styles = `
     font-size: 15px;
     border: 1px solid rgba(153,3,125,0.3);
   }
-  .light .ep-card-icon {
-    background: linear-gradient(135deg, rgba(153,3,125,0.1), rgba(76,0,62,0.15));
-  }
 
   .ep-card-title {
     font-family: 'Syne', sans-serif;
@@ -208,7 +159,6 @@ const styles = `
     font-size: 15px;
     color: #fff;
   }
-  .light .ep-card-title { color: #1a001a; }
 
   .ep-card-body {
     padding: 24px;
@@ -253,7 +203,6 @@ const styles = `
     display: flex; align-items: center; justify-content: center;
     font-size: 9px;
   }
-  .light .avatar-badge { border-color: #fff; }
 
   .avatar-info { flex: 1; min-width: 160px; }
 
@@ -264,14 +213,12 @@ const styles = `
     color: #fff;
     margin-bottom: 4px;
   }
-  .light .avatar-name { color: #1a001a; }
 
   .avatar-email {
     font-size: 13px;
     color: rgba(255,255,255,0.45);
     margin-bottom: 10px;
   }
-  .light .avatar-email { color: rgba(76,0,62,0.55); }
 
   .avatar-tag {
     display: inline-flex;
@@ -302,7 +249,6 @@ const styles = `
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .light .field-label { color: rgba(76,0,62,0.6); }
 
   .field-input, .field-textarea {
     width: 100%;
@@ -325,24 +271,11 @@ const styles = `
     box-shadow: 0 0 0 3px rgba(153,3,125,0.15);
   }
 
-  .light .field-input, .light .field-textarea {
-    background: #f8f4f8;
-    border-color: rgba(76,0,62,0.15);
-    color: #1a001a;
-  }
-  .light .field-input::placeholder, .light .field-textarea::placeholder { color: rgba(76,0,62,0.35); }
-  .light .field-input:focus, .light .field-textarea:focus {
-    background: #fff;
-    border-color: rgba(153,3,125,0.5);
-    box-shadow: 0 0 0 3px rgba(153,3,125,0.08);
-  }
-
   .field-hint {
     font-size: 11px;
     color: rgba(255,255,255,0.3);
     margin-top: 5px;
   }
-  .light .field-hint { color: rgba(76,0,62,0.4); }
 
   /* Character count */
   .char-count {
@@ -351,7 +284,6 @@ const styles = `
     color: rgba(255,255,255,0.25);
     margin-top: 4px;
   }
-  .light .char-count { color: rgba(76,0,62,0.35); }
 
   /* Grid */
   .field-grid {
@@ -374,10 +306,6 @@ const styles = `
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.07);
   }
-  .light .url-preview {
-    background: rgba(76,0,62,0.03);
-    border-color: rgba(76,0,62,0.08);
-  }
   .url-preview-img {
     width: 36px; height: 36px;
     border-radius: 8px;
@@ -392,7 +320,6 @@ const styles = `
     color: rgba(255,255,255,0.4);
     word-break: break-all;
   }
-  .light .url-preview-text { color: rgba(76,0,62,0.5); }
 
   /* Actions */
   .ep-actions {
@@ -443,12 +370,6 @@ const styles = `
     transition: all 0.2s;
   }
   .btn-cancel:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .light .btn-cancel {
-    background: rgba(76,0,62,0.05);
-    border-color: rgba(76,0,62,0.15);
-    color: rgba(76,0,62,0.7);
-  }
-  .light .btn-cancel:hover { background: rgba(76,0,62,0.1); color: #4C003E; }
 
   /* Save feedback */
   .save-feedback {
@@ -471,10 +392,6 @@ const styles = `
     border-radius: 8px;
     height: 44px;
   }
-  .light .shimmer {
-    background: linear-gradient(90deg, #f0e8f0 0%, #e8d8e8 50%, #f0e8f0 100%);
-    background-size: 200% 100%;
-  }
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
@@ -486,7 +403,6 @@ const styles = `
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
     margin: 20px 0;
   }
-  .light .ep-divider { background: linear-gradient(90deg, transparent, rgba(76,0,62,0.1), transparent); }
 
   @keyframes blink { 0%,80%,100% { opacity: 0; } 40% { opacity: 1; } }
   .dot { display: inline-block; animation: blink 1.2s ease-in-out infinite; }
@@ -503,7 +419,7 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+
 
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
@@ -565,7 +481,7 @@ export default function EditProfile() {
   return (
     <>
       <style>{styles}</style>
-      <div className={`ep-root ${darkMode ? "" : "light"}`}>
+      <div className="ep-root">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
 
@@ -578,9 +494,6 @@ export default function EditProfile() {
             EDU-TECH
           </Link>
           <div className="ep-navbar-right">
-            <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? "☀️" : "🌙"}
-            </button>
             <button className="back-btn" onClick={() => navigate("/profile")}>
               ← Back to Profile
             </button>
