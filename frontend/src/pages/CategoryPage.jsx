@@ -254,9 +254,8 @@ const styles = `
 
   @media(max-width:768px){
     .cat-navbar { padding:0 16px; }
-    .cat-nav-links,.cat-logout,.cat-icon-btn { display:none; }
+    .cat-nav-links,.cat-logout { display:none; }
     .cat-drawer .cat-logout { display:flex !important; }
-    .cat-drawer .cat-icon-btn { display:flex !important; }
     .cat-hamburger { display:flex; }
     .cat-hero { padding:36px 16px 88px; }
     .cat-stats-strip { padding:0 16px; }
@@ -278,16 +277,13 @@ const CATEGORY_META = {
 
 const SORT_OPTIONS = ["Default", "Price: Low to High", "Price: High to Low", "Top Rated"];
 
-
-
 export default function CategoryPage() {
   const { category } = useParams();
   const navigate     = useNavigate();
 
-  const [courses,   setCourses]   = useState([]);
-  const [sort,      setSort]      = useState("Default");
-  const [menuOpen,  setMenuOpen]  = useState(false);
-  const [darkMode,  setDarkMode]  = useState(() => localStorage.getItem("theme") !== "light");
+  const [courses,  setCourses]  = useState([]);
+  const [sort,     setSort]     = useState("Default");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Close mobile menu on scroll
   useEffect(() => {
@@ -312,12 +308,6 @@ export default function CategoryPage() {
     if (sort === "Top Rated")           return b.rating - a.rating;
     return 0;
   });
-
-  const toggleTheme = () => {
-  const next = !darkMode;
-  setDarkMode(next);
-  localStorage.setItem("theme", next ? "dark" : "light");
-};
 
   const avgRating = filtered.length
     ? (filtered.reduce((s, c) => s + parseFloat(c.rating || 0), 0) / filtered.length).toFixed(1)
@@ -348,11 +338,8 @@ export default function CategoryPage() {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile">Profile</Link>
             </div>
-            <button className="cat-icon-btn" onClick={toggleTheme}>
-              {darkMode ? "☀️" : "🌙"}
-            </button>
             <button className="cat-logout" onClick={handleLogout}><span>⏻</span> Logout</button>
-            <button className={`cat-hamburger ${menuOpen ? "open" : ""}`} onClick={() => { toggleTheme(); setMenuOpen(false); }}>
+            <button className={`cat-hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(prev => !prev)}>
               <span /><span /><span />
             </button>
           </div>
@@ -366,9 +353,6 @@ export default function CategoryPage() {
           <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
           <div className="cat-drawer-divider" />
           <div className="cat-drawer-actions">
-            <button className="cat-icon-btn" style={{flex:1,width:"auto",borderRadius:10}} onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }}>
-              {darkMode ? "☀️" : "🌙"}
-            </button>
             <button className="cat-logout" onClick={handleLogout}>⏻ Logout</button>
           </div>
         </div>

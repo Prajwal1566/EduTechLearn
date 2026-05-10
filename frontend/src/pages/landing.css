@@ -242,7 +242,6 @@ body {
   background: rgba(20, 0, 18, 0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   transition: max-height 0.35s ease, padding 0.3s ease;
   padding: 0 20px;
 }
