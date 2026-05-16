@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./landing.css";
 import logo from "../asset/logow.png";
-import { FaUserGraduate, FaRocket, FaStar, FaRobot, FaChartBar, FaGlobe, FaBullseye } from "react-icons/fa";
+import { FaUserGraduate, FaRocket, FaStar, FaRobot, FaChartBar, FaGlobe, FaBullseye, FaArrowRight } from "react-icons/fa";
 
 export default function LandingPage() {
   const [students, setStudents] = useState(0);
@@ -138,7 +138,7 @@ export default function LandingPage() {
             <div className="hero-buttons">
               <Link to="/signup" className="btn btn-primary">
                 Get Started
-                <span className="btn-arrow">→</span>
+                <FaArrowRight style={{ marginLeft: 8 }} />
               </Link>
               <button className="btn btn-secondary" onClick={scrollToFeatures}>Learn More</button>
             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaClipboardList, FaCheckCircle, FaArrowUp, FaPhone, FaEnvelope } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -247,7 +247,7 @@ export default function Terms() {
         {/* ── HERO ── */}
         <div className="tc-hero">
           <div className="tc-hero-inner">
-            <div className="tc-hero-icon">📋</div>
+            <div className="tc-hero-icon"><FaClipboardList style={{ color: "#fff" }} /></div>
             <h1 className="tc-hero-title">Terms & Conditions</h1>
             <p className="tc-last-updated">Last Updated: February 2026</p>
           </div>
@@ -282,7 +282,7 @@ export default function Terms() {
 
           {/* Agree box */}
           <div className="tc-agree">
-            <span className="tc-agree-icon">✅</span>
+            <span className="tc-agree-icon"><FaCheckCircle style={{ color: "#44ee88" }} /></span>
             <p className="tc-agree-text">
               By using <strong>EDU-TECH</strong>, you acknowledge that you have read and agree to these Terms & Conditions.
             </p>
@@ -290,7 +290,7 @@ export default function Terms() {
 
           {/* Back to top */}
           <button className="tc-top-btn" onClick={() => window.scrollTo({ top:0, behavior:"smooth" })}>
-            ↑ Back to Top
+            <FaArrowUp style={{ marginRight: 6 }} /> Back to Top
           </button>
 
         </div>
@@ -317,8 +317,8 @@ export default function Terms() {
             </div>
             <div className="tc-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 6 }} /> +91 98765 43210</p>
+              <p><FaEnvelope style={{ marginRight: 6 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="tc-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

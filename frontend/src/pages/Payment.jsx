@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaRegCreditCard, FaGooglePay, FaMobileAlt, FaPaypal, FaChevronDown, FaArrowRight, FaLock } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -309,28 +309,28 @@ const styles = `
 `;
 
 const METHODS = [
-  { id: "visa",   name: "Credit / Debit Card",  desc: "Visa, Mastercard, RuPay",          icon: "💳" },
-  { id: "gpay",   name: "Google Pay",            desc: "Pay via UPI with Google Pay",      icon: "🔵" },
-  { id: "upi",    name: "UPI",                   desc: "Any UPI app — PhonePe, BHIM, etc.", icon: "📲" },
-  { id: "paypal", name: "PayPal",                desc: "Pay with your PayPal account",     icon: "🅿️" },
+  { id: "visa", name: "Credit / Debit Card", desc: "Visa, Mastercard, RuPay", icon: <FaRegCreditCard style={{ color: "#ea00ffff" }} /> },
+  { id: "gpay", name: "Google Pay", desc: "Pay via UPI with Google Pay", icon: <FaGooglePay style={{ color: "#ea00ffff" }} /> },
+  { id: "upi", name: "UPI", desc: "Any UPI app — PhonePe, BHIM, etc.", icon: <FaMobileAlt style={{ color: "#ea00ffff" }} /> },
+  { id: "paypal", name: "PayPal", desc: "Pay with your PayPal account", icon: <FaPaypal style={{ color: "#ea00ffff" }} /> },
 ];
 
 export default function Payment() {
-  const location  = useLocation();
-  const navigate  = useNavigate();
-  const price     = location.state?.price || 0;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const price = location.state?.price || 0;
 
-  const [selected, setSelected]   = useState(null);
-  const [cardNum, setCardNum]      = useState("");
-  const [expiry, setExpiry]        = useState("");
-  const [cvv, setCvv]              = useState("");
-  const [cardName, setCardName]    = useState("");
-  const [upiId, setUpiId]          = useState("");
-  const [gpayId, setGpayId]        = useState("");
+  const [selected, setSelected] = useState(null);
+  const [cardNum, setCardNum] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [upiId, setUpiId] = useState("");
+  const [gpayId, setGpayId] = useState("");
   const [paypalEmail, setPaypalEmail] = useState("");
 
-  const formatCard   = v => v.replace(/\D/g,"").slice(0,16).replace(/(.{4})/g,"$1 ").trim();
-  const formatExpiry = v => { const d = v.replace(/\D/g,"").slice(0,4); return d.length >= 3 ? d.slice(0,2)+"/"+d.slice(2) : d; };
+  const formatCard = v => v.replace(/\D/g, "").slice(0, 16).replace(/(.{4})/g, "$1 ").trim();
+  const formatExpiry = v => { const d = v.replace(/\D/g, "").slice(0, 4); return d.length >= 3 ? d.slice(0, 2) + "/" + d.slice(2) : d; };
 
   const handlePay = () => {
     if (window.confirm(`Confirm payment of ₹${price}?`)) {
@@ -400,7 +400,7 @@ export default function Payment() {
                 </div>
                 <div className="pay-method-right">
                   <div className="pay-radio"><div className="pay-radio-dot" /></div>
-                  <span className="pay-chevron">▼</span>
+                  <span className="pay-chevron"><FaChevronDown /></span>
                 </div>
               </div>
 
@@ -427,7 +427,7 @@ export default function Payment() {
                       <div className="pay-field">
                         <label className="pay-field-label">CVV</label>
                         <input className="pay-field-input" placeholder="•••" type="password"
-                          value={cvv} onChange={e => setCvv(e.target.value.replace(/\D/g,"").slice(0,4))} maxLength={4} />
+                          value={cvv} onChange={e => setCvv(e.target.value.replace(/\D/g, "").slice(0, 4))} maxLength={4} />
                       </div>
                     </div>
                   </div>
@@ -439,7 +439,7 @@ export default function Payment() {
                 <div className={`pay-dropdown ${selected === "gpay" ? "open" : ""}`}>
                   <div className="pay-dropdown-inner" onClick={stopProp}>
                     <div className="pay-qr-stub">
-                      <div className="pay-qr-box">📱</div>
+                      <div className="pay-qr-box"><FaMobileAlt /></div>
                       <div className="pay-qr-text">
                         <strong>Pay with Google Pay</strong>
                         Enter your UPI ID linked to Google Pay
@@ -489,12 +489,12 @@ export default function Payment() {
           {/* ── PAY BUTTON ── */}
           <div className="pay-btn-wrap">
             <button className="pay-btn" onClick={handlePay} disabled={!selected}>
-              {selected ? `Pay ₹${price} →` : "Select a payment method"}
+              {selected ? `Pay ₹${price} ` : "Select a payment method"}{selected && <FaArrowRight style={{ marginLeft: 6 }} />}
             </button>
           </div>
 
           <div className="pay-secure">
-            🔒 256-bit SSL encrypted · Secure Checkout
+            <FaLock style={{ marginRight: 6 }} /> 256-bit SSL encrypted · Secure Checkout
           </div>
 
         </div>

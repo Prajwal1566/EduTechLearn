@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaQuestionCircle, FaEnvelope, FaComments, FaPhone, FaPaperPlane, FaCheckCircle, FaArrowRight, FaRegQuestionCircle, FaChevronDown } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -321,7 +321,7 @@ export default function HelpCenter() {
         {/* ── HERO ── */}
         <div className="hc-hero">
           <div className="hc-hero-inner">
-            <div className="hc-hero-icon">🎯</div>
+            <div className="hc-hero-icon"><FaQuestionCircle style={{ color: "#fff" }} /></div>
             <h1 className="hc-hero-title">Help Center</h1>
             <p className="hc-hero-sub">We're here to support your learning journey.<br />Find answers or reach out to our team.</p>
           </div>
@@ -331,17 +331,17 @@ export default function HelpCenter() {
         <div className="hc-contact-strip">
           <div className="hc-contact-card">
             <div className="hc-contact-item">
-              <div className="hc-contact-icon">✉️</div>
+              <div className="hc-contact-icon"><FaEnvelope style={{ color: "#fff" }} /></div>
               <div className="hc-contact-label">Email Support</div>
               <div className="hc-contact-val">support@edutech.com</div>
             </div>
             <div className="hc-contact-item">
-              <div className="hc-contact-icon">💬</div>
+              <div className="hc-contact-icon"><FaComments style={{ color: "#fff" }} /></div>
               <div className="hc-contact-label">Live Chat</div>
               <div className="hc-contact-val">Available 9AM – 6PM</div>
             </div>
             <div className="hc-contact-item">
-              <div className="hc-contact-icon">📞</div>
+              <div className="hc-contact-icon"><FaPhone style={{ color: "#fff" }} /></div>
               <div className="hc-contact-label">Phone</div>
               <div className="hc-contact-val">+91 98765 43210</div>
             </div>
@@ -353,11 +353,11 @@ export default function HelpCenter() {
 
           {/* FORM */}
           <div className="hc-form-card">
-            <div className="hc-card-title">📩 Submit a Request</div>
+            <div className="hc-card-title"><FaPaperPlane style={{ marginRight: 8 }} /> Submit a Request</div>
             <div className="hc-card-sub">Fill out the form and we'll get back to you within 24 hours.</div>
 
             {submitted && (
-              <div className="hc-success">✓ Your request has been submitted! We'll respond shortly.</div>
+                <div className="hc-success"><FaCheckCircle style={{ marginRight: 8 }} /> Your request has been submitted! We'll respond shortly.</div>
             )}
 
             <form onSubmit={handleSubmit}>
@@ -381,13 +381,13 @@ export default function HelpCenter() {
                 <textarea className="hc-textarea" name="message" placeholder="Describe your issue in detail..."
                   value={form.message} onChange={handleChange} required />
               </div>
-              <button type="submit" className="hc-submit">Send Request →</button>
+              <button type="submit" className="hc-submit">Send Request <FaArrowRight style={{ marginLeft: 6 }} /></button>
             </form>
           </div>
 
           {/* FAQ */}
           <div className="hc-faq-card">
-            <div className="hc-card-title">❓ Frequently Asked Questions</div>
+            <div className="hc-card-title"><FaRegQuestionCircle style={{ marginRight: 8 }} /> Frequently Asked Questions</div>
             <div className="hc-card-sub" style={{marginBottom:8}}>Click a question to expand the answer.</div>
 
             {FAQS.map((faq, i) => (
@@ -395,7 +395,7 @@ export default function HelpCenter() {
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                 <div className="hc-faq-q">
                   {faq.q}
-                  <span className="hc-faq-chevron">▼</span>
+                  <span className="hc-faq-chevron"><FaChevronDown /></span>
                 </div>
                 <div className="hc-faq-a">
                   <div className="hc-faq-a-inner">{faq.a}</div>
@@ -428,8 +428,8 @@ export default function HelpCenter() {
             </div>
             <div className="hc-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 6 }} /> +91 98765 43210</p>
+              <p><FaEnvelope style={{ marginRight: 6 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="hc-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

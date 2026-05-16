@@ -3,7 +3,7 @@ import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
-import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaDownload, FaBackpack, FaTrophy, FaBolt, FaSearch } from "react-icons/fa";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaDownload, FaBackpack, FaTrophy, FaBolt, FaSearch, FaPlay } from "react-icons/fa";
 import { FiPower, FiMail } from "react-icons/fi";
 
 export default function MyCourses() {
@@ -169,7 +169,7 @@ export default function MyCourses() {
                         className="mc-continue-btn"
                         onClick={() => navigate(`/course/${course.id}`)}
                       >
-                        ▶ Continue Learning
+                        <FaPlay style={{ fontSize: 10, marginRight: 6 }} /> Continue Learning
                       </button>
                     </div>
                   ))}

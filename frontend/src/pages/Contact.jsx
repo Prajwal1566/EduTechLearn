@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaEnvelopeOpenText, FaEnvelope, FaPhone, FaClock, FaComments, FaCheckCircle, FaArrowRight, FaBuilding, FaBolt, FaMapMarkerAlt, FaTwitter, FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -338,7 +338,7 @@ export default function Contact() {
         {/* ── HERO ── */}
         <div className="ct-hero">
           <div className="ct-hero-inner">
-            <div className="ct-hero-icon">📬</div>
+            <div className="ct-hero-icon"><FaEnvelopeOpenText style={{ color: "#fff" }} /></div>
             <h1 className="ct-hero-title">Get in Touch</h1>
             <p className="ct-hero-sub">Have a question or need help? We'd love to hear from you.<br />Our team will respond within 24 hours.</p>
           </div>
@@ -348,17 +348,17 @@ export default function Contact() {
         <div className="ct-cards-strip">
           <div className="ct-cards-row">
             <div className="ct-info-card">
-              <div className="ct-info-icon">✉️</div>
+              <div className="ct-info-icon"><FaEnvelope /></div>
               <div className="ct-info-label">Email Us</div>
               <div className="ct-info-val">support@edutech.com</div>
             </div>
             <div className="ct-info-card">
-              <div className="ct-info-icon">📞</div>
+              <div className="ct-info-icon"><FaPhone /></div>
               <div className="ct-info-label">Call Us</div>
               <div className="ct-info-val">+91 98765 43210</div>
             </div>
             <div className="ct-info-card">
-              <div className="ct-info-icon">🕐</div>
+              <div className="ct-info-icon"><FaClock /></div>
               <div className="ct-info-label">Working Hours</div>
               <div className="ct-info-val">Mon–Sat, 9AM–6PM</div>
             </div>
@@ -370,11 +370,11 @@ export default function Contact() {
 
           {/* LEFT — Form */}
           <div className="ct-form-card">
-            <div className="ct-card-title">💬 Send a Message</div>
+            <div className="ct-card-title"><FaComments style={{ marginRight: 8 }} /> Send a Message</div>
             <div className="ct-card-sub">Fill the form and we'll get back to you shortly.</div>
 
             {submitted && (
-              <div className="ct-success">✓ Message sent! We'll respond within 24 hours.</div>
+              <div className="ct-success"><FaCheckCircle style={{ marginRight: 8 }} /> Message sent! We'll respond within 24 hours.</div>
             )}
 
             <form onSubmit={handleSubmit}>
@@ -406,7 +406,7 @@ export default function Contact() {
                 <textarea className="ct-textarea" name="message" placeholder="Write your message here..."
                   value={form.message} onChange={handleChange} required />
               </div>
-              <button type="submit" className="ct-submit">Send Message →</button>
+              <button type="submit" className="ct-submit">Send Message <FaArrowRight style={{ marginLeft: 6 }} /></button>
             </form>
           </div>
 
@@ -415,7 +415,7 @@ export default function Contact() {
 
             <div className="ct-detail-card">
               <div className="ct-detail-header">
-                <div className="ct-detail-icon">🏢</div>
+                <div className="ct-detail-icon"><FaBuilding /></div>
                 <div className="ct-detail-title">Our Office</div>
               </div>
               <div className="ct-detail-body">EDU-TECH Pvt. Ltd.<br />123 Learning Street, Tech Park<br />Bengaluru, Karnataka 560001</div>
@@ -423,24 +423,24 @@ export default function Contact() {
 
             <div className="ct-detail-card">
               <div className="ct-detail-header">
-                <div className="ct-detail-icon">⚡</div>
+                <div className="ct-detail-icon"><FaBolt /></div>
                 <div className="ct-detail-title">Quick Response</div>
               </div>
               <div className="ct-detail-body">For urgent issues, reach us directly at <strong style={{color:"#ff88dd"}}>support@edutech.com</strong> or call during working hours for immediate assistance.</div>
             </div>
 
             <div className="ct-map-stub">
-              <div className="ct-map-stub-icon">📍</div>
+              <div className="ct-map-stub-icon"><FaMapMarkerAlt /></div>
               <span>Bengaluru, Karnataka, India</span>
             </div>
 
             <div className="ct-social-card">
               <div className="ct-social-title">Follow Us</div>
               <div className="ct-socials">
-                <a href="/twitter" className="ct-social-btn">🐦<span>Twitter</span></a>
-                <a href="/liked" className="ct-social-btn">💼<span>LinkedIn</span></a>
-                <a href="/isa" className="ct-social-btn">📸<span>Instagram</span></a>
-                <a href="/you" className="ct-social-btn">▶️<span>YouTube</span></a>
+                <a href="/twitter" className="ct-social-btn"><FaTwitter /><span>Twitter</span></a>
+                <a href="/liked" className="ct-social-btn"><FaLinkedin /><span>LinkedIn</span></a>
+                <a href="/isa" className="ct-social-btn"><FaInstagram /><span>Instagram</span></a>
+                <a href="/you" className="ct-social-btn"><FaYoutube /><span>YouTube</span></a>
               </div>
             </div>
 
@@ -469,8 +469,8 @@ export default function Contact() {
             </div>
             <div className="ct-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 6 }} /> +91 98765 43210</p>
+              <p><FaEnvelope style={{ marginRight: 6 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="ct-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

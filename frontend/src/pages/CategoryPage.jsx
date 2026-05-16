@@ -3,7 +3,7 @@ import logo from "../asset/logow.png";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 import API from "../api";
-import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaFire, FaLaptopCode, FaRobot, FaPaintBrush, FaStar, FaGraduationCap, FaPhone, FaEnvelope, FaArrowLeft } from "react-icons/fa";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaFire, FaLaptopCode, FaRobot, FaPaintBrush, FaStar, FaGraduationCap, FaPhone, FaEnvelope, FaArrowLeft, FaChevronRight } from "react-icons/fa";
 import { FiPower } from "react-icons/fi";
 
 const styles = `
@@ -363,7 +363,7 @@ export default function CategoryPage() {
         <div className="cat-hero">
           <div className="cat-hero-inner">
             <div className="cat-breadcrumb">
-              <Link to="/home">Home</Link> › <span style={{color:"rgba(255,255,255,.6)"}}>Courses</span> › <span style={{color:"rgba(255,255,255,.6)"}}>{category}</span>
+              <Link to="/home">Home</Link> <FaChevronRight style={{ fontSize: 8, opacity: 0.5 }} /> <span style={{color:"rgba(255,255,255,.6)"}}>Courses</span> <FaChevronRight style={{ fontSize: 8, opacity: 0.5 }} /> <span style={{color:"rgba(255,255,255,.6)"}}>{category}</span>
             </div>
             <div className="cat-hero-icon">{meta.icon}</div>
             <h1 className="cat-hero-title"><span>{category}</span> Courses</h1>

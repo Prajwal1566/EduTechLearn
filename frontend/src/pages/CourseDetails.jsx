@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import API from "../api";
-import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaGraduationCap, FaTrophy, FaLock, FaVideo, FaMobileAlt, FaDownload, FaGlobe, FaClock, FaStar, FaInfinity } from "react-icons/fa";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaGraduationCap, FaTrophy, FaLock, FaVideo, FaMobileAlt, FaDownload, FaGlobe, FaClock, FaStar, FaInfinity, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import { FiPower, FiMail } from "react-icons/fi";
 
 const styles = `
@@ -543,7 +543,7 @@ export default function CourseDetails() {
           <div className="cd-left">
             {/* Breadcrumb */}
             <div className="cd-breadcrumb">
-              <Link to="/home">Home</Link> › <Link to="/home">{course.category || "Courses"}</Link> › <span style={{color:"rgba(255,255,255,.6)"}}>{course.title}</span>
+              <Link to="/home">Home</Link> <FaChevronRight style={{ fontSize: 8, opacity: 0.5 }} /> <Link to="/home">{course.category || "Courses"}</Link> <FaChevronRight style={{ fontSize: 8, opacity: 0.5 }} /> <span style={{color:"rgba(255,255,255,.6)"}}>{course.title}</span>
             </div>
 
             <div className="cd-title">{course.title}</div>
@@ -647,7 +647,7 @@ export default function CourseDetails() {
                   <button className="cd-cta-primary" onClick={() =>
                     navigate("/payment", { state: { price: course.price, courseId: course.id } })
                   }>
-                    {course.price === 0 ? "Enroll for Free" : "Checkout →"}
+                    {course.price === 0 ? "Enroll for Free" : "Checkout"} {course.price !== 0 && <FaArrowRight style={{ marginLeft: 6 }} />}
                   </button>
                 )}
 

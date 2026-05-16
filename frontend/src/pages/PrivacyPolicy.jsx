@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaLock, FaEnvelope, FaArrowUp, FaPhone } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -246,7 +246,7 @@ export default function PrivacyPolicy() {
         {/* ── HERO ── */}
         <div className="pp-hero">
           <div className="pp-hero-inner">
-            <div className="pp-hero-icon">🔒</div>
+            <div className="pp-hero-icon"><FaLock style={{ color: "#fff" }} /></div>
             <h1 className="pp-hero-title">Privacy Policy</h1>
             <p className="pp-last-updated">Last Updated: February 2026</p>
           </div>
@@ -281,7 +281,7 @@ export default function PrivacyPolicy() {
 
           {/* Contact box */}
           <div className="pp-contact">
-            <span className="pp-contact-icon">✉️</span>
+            <span className="pp-contact-icon"><FaEnvelope style={{ color: "#ff88dd" }} /></span>
             <p className="pp-contact-text">
               If you have any questions about this Privacy Policy, contact us at <strong>support@edutech.com</strong>
             </p>
@@ -289,7 +289,7 @@ export default function PrivacyPolicy() {
 
           {/* Back to top */}
           <button className="pp-top-btn" onClick={() => window.scrollTo({ top:0, behavior:"smooth" })}>
-            ↑ Back to Top
+            <FaArrowUp style={{ marginRight: 6 }} /> Back to Top
           </button>
 
         </div>
@@ -316,8 +316,8 @@ export default function PrivacyPolicy() {
             </div>
             <div className="pp-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 6 }} /> +91 98765 43210</p>
+              <p><FaEnvelope style={{ marginRight: 6 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="pp-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>
