@@ -3,6 +3,9 @@ import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaFire, FaLaptopCode, FaRobot, FaPaintBrush, FaPhone } from "react-icons/fa";
+import { FiSearch, FiPower, FiMail } from "react-icons/fi";
+import { MdTrendingUp } from "react-icons/md";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -402,15 +405,15 @@ export default function Home({ onAddWishlist }) {
   });
 
   const trending = filtered.filter(c => c.category === "Trending");
-  const coding   = filtered.filter(c => c.category === "Coding");
-  const ai       = filtered.filter(c => c.category === "AI");
-  const design   = filtered.filter(c => c.category === "Design");
+  const coding = filtered.filter(c => c.category === "Coding");
+  const ai = filtered.filter(c => c.category === "AI");
+  const design = filtered.filter(c => c.category === "Design");
 
   const sections = [
-    { title: "🔥 Trending", icon: "🔥", category: "Trending", data: trending },
-    { title: "💻 Coding",   icon: "💻", category: "Coding",   data: coding   },
-    { title: "🤖 AI",       icon: "🤖", category: "AI",       data: ai       },
-    { title: "🎨 Design",   icon: "🎨", category: "Design",   data: design   },
+    { title: "Trending", icon: <FaFire style={{ color: "#ff6b35" }} />, category: "Trending", data: trending },
+    { title: "Coding", icon: <FaLaptopCode style={{ color: "#44ccff" }} />, category: "Coding", data: coding },
+    { title: "AI", icon: <FaRobot style={{ color: "#cc05a0" }} />, category: "AI", data: ai },
+    { title: "Design", icon: <FaPaintBrush style={{ color: "#ff66cc" }} />, category: "Design", data: design },
   ];
 
   return (
@@ -438,7 +441,7 @@ export default function Home({ onAddWishlist }) {
               <Link to="/profile">Profile</Link>
             </div>
             <button className="logout-btn" onClick={handleLogout}>
-              <span>⏻</span> Logout
+              <FiPower /> Logout
             </button>
             <button
               className={`hm-hamburger ${menuOpen ? "open" : ""}`}
@@ -452,10 +455,10 @@ export default function Home({ onAddWishlist }) {
 
         {/* ── MOBILE DRAWER ── */}
         <div className={`hm-drawer ${menuOpen ? "open" : ""}`}>
-          <Link to="/home" className="active" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-          <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-          <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-          <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
+          <Link to="/home" className="active" onClick={() => setMenuOpen(false)}><FaHome /> Home</Link>
+          <Link to="/my-courses" onClick={() => setMenuOpen(false)}><FaBookOpen /> My Courses</Link>
+          <Link to="/wishlist" onClick={() => setMenuOpen(false)}><FaHeart /> Wishlist</Link>
+          <Link to="/profile" onClick={() => setMenuOpen(false)}><FaUserCircle /> Profile</Link>
           <div className="hm-drawer-divider" />
           <div className="hm-drawer-row" style={{ width: "100%" }}>
             <button
@@ -463,7 +466,7 @@ export default function Home({ onAddWishlist }) {
               style={{ width: "100%", justifyContent: "center" }}
               onClick={handleLogout}
             >
-              ⏻ Logout
+              <FiPower /> Logout
             </button>
           </div>
         </div>
@@ -483,7 +486,7 @@ export default function Home({ onAddWishlist }) {
             </p>
 
             <div className="hm-search-wrap">
-              <span className="hm-search-icon">🔍</span>
+              <span className="hm-search-icon"><FiSearch /></span>
               <input
                 className="hm-search"
                 placeholder="Search for courses..."
@@ -493,7 +496,7 @@ export default function Home({ onAddWishlist }) {
             </div>
 
             <div className="hm-cats">
-              {["All","Trending","Coding","AI","Design"].map(cat => (
+              {["All", "Trending", "Coding", "AI", "Design"].map(cat => (
                 <button
                   key={cat}
                   className={`hm-cat ${activeCategory === cat ? "active" : ""}`}
@@ -510,22 +513,22 @@ export default function Home({ onAddWishlist }) {
         <div className="hm-stats-band">
           <div className="hm-stats-card">
             <div className="hm-stat">
-              <div className="hm-stat-icon">📚</div>
+              <div className="hm-stat-icon"><FaBookOpen style={{ color: "#4dffff", fontSize: "26px" }} /></div>
               <div className="hm-stat-num">{courses.length}</div>
               <div className="hm-stat-label">Total Courses</div>
             </div>
             <div className="hm-stat">
-              <div className="hm-stat-icon">🔥</div>
+              <div className="hm-stat-icon"><MdTrendingUp style={{ color: '#ff6b35', fontSize: "26px" }} /></div>
               <div className="hm-stat-num">{trending.length}</div>
               <div className="hm-stat-label">Trending Now</div>
             </div>
             <div className="hm-stat">
-              <div className="hm-stat-icon">🤖</div>
+              <div className="hm-stat-icon"><FaRobot style={{ color: '#cc05a0', fontSize: "26px" }} /></div>
               <div className="hm-stat-num">{ai.length}</div>
               <div className="hm-stat-label">AI Courses</div>
             </div>
             <div className="hm-stat">
-              <div className="hm-stat-icon">🎨</div>
+              <div className="hm-stat-icon"><FaPaintBrush style={{ color: '#ff66cc', fontSize: "26px" }} /></div>
               <div className="hm-stat-num">{design.length}</div>
               <div className="hm-stat-label">Design Courses</div>
             </div>
@@ -534,12 +537,12 @@ export default function Home({ onAddWishlist }) {
 
         {/* ── COURSE SECTIONS ── */}
         <div className="hm-content">
-          {sections.map(({ title, category, data }) => (
+          {sections.map(({ title, category, data, icon }) => (
             data.length > 0 && (
               <div className="hm-section" key={category}>
                 <div className="hm-section-header">
                   <div className="hm-section-title">
-                    {title}
+                    {icon} {title}
                     <span className="hm-section-count">({data.length})</span>
                   </div>
                   {data.length > 3 && (
@@ -563,7 +566,7 @@ export default function Home({ onAddWishlist }) {
 
           {filtered.length === 0 && (
             <div className="hm-empty">
-              <div className="hm-empty-icon">🔍</div>
+              <div className="hm-empty-icon"><FiSearch /></div>
               <div className="hm-empty-text">No courses found for "{search}"</div>
             </div>
           )}
@@ -591,8 +594,8 @@ export default function Home({ onAddWishlist }) {
             </div>
             <div className="hm-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 4 }} /> +91 98765 43210</p>
+              <p><FiMail style={{ marginRight: 4 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="hm-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

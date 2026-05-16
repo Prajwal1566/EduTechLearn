@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -312,7 +313,7 @@ export default function HelpCenter() {
             </div>
           </Link>
           <button className="hc-back" onClick={() => navigate(-1)}>
-            <span className="hc-back-arrow">←</span>
+            <span className="hc-back-arrow"><FaArrowLeft style={{ color: "#fff" }} /></span>
             Back
           </button>
         </nav>

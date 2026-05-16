@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -328,7 +329,7 @@ export default function Contact() {
               <Link to="/profile">Profile</Link>
             </div>
             <button className="ct-back" onClick={() => navigate(-1)}>
-              <span className="ct-back-arrow">←</span>
+              <span className="ct-back-arrow"><FaArrowLeft style={{ color: "#fff" }} /></span>
               Back
             </button>
           </div>

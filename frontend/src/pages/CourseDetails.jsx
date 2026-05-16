@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaGraduationCap, FaTrophy, FaLock, FaVideo, FaMobileAlt, FaDownload, FaGlobe, FaClock, FaStar, FaInfinity } from "react-icons/fa";
+import { FiPower, FiMail } from "react-icons/fi";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -485,7 +487,7 @@ export default function CourseDetails() {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile">Profile</Link>
             </div>
-            <button className="logout-btn" onClick={handleLogout}><span>⏻</span> Logout</button>
+            <button className="logout-btn" onClick={handleLogout}><FiPower /> Logout</button>
             <button
               className={`cd-hamburger ${menuOpen ? "open" : ""}`}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -498,10 +500,10 @@ export default function CourseDetails() {
 
         {/* ── MOBILE DRAWER ── */}
         <div className={`cd-drawer ${menuOpen ? "open" : ""}`}>
-          <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-          <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-          <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-          <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
+          <Link to="/home" onClick={() => setMenuOpen(false)}><FaHome /> Home</Link>
+          <Link to="/my-courses" onClick={() => setMenuOpen(false)}><FaBookOpen /> My Courses</Link>
+          <Link to="/wishlist" onClick={() => setMenuOpen(false)}><FaHeart /> Wishlist</Link>
+          <Link to="/profile" onClick={() => setMenuOpen(false)}><FaUserCircle /> Profile</Link>
           <div className="cd-drawer-divider" />
           <div className="cd-drawer-row" style={{ width: "100%" }}>
             <button
@@ -509,7 +511,7 @@ export default function CourseDetails() {
               style={{ width: "100%", justifyContent: "center" }}
               onClick={handleLogout}
             >
-              ⏻ Logout
+              <FiPower /> Logout
             </button>
           </div>
         </div>
@@ -524,7 +526,7 @@ export default function CourseDetails() {
                 <>
                   <img src={course.image} alt="preview" />
                   <div className="cd-video-lock">
-                    <div className="cd-lock-icon">🔒</div>
+                    <div className="cd-lock-icon"><FaLock /></div>
                     <div className="cd-lock-text">Purchase to unlock full video</div>
                     <div className="cd-lock-sub">Preview not available</div>
                   </div>
@@ -549,9 +551,9 @@ export default function CourseDetails() {
             {/* Meta */}
             <div className="cd-meta">
               <span className="cd-meta-item"><span className="cd-rating">★ {course.rating}</span></span>
-              <span className="cd-meta-item">👤 {course.lecturer}</span>
-              <span className="cd-meta-item">🌐 {course.language || "English"}</span>
-              <span className="cd-meta-item">⏱ {course.duration}h</span>
+              <span className="cd-meta-item"><FaUserCircle style={{marginRight:3}}/> {course.lecturer}</span>
+              <span className="cd-meta-item"><FaGlobe style={{marginRight:3}}/> {course.language || "English"}</span>
+              <span className="cd-meta-item"><FaClock style={{marginRight:3}}/> {course.duration}h</span>
               {course.badge && <span className="cd-badge">{course.badge}</span>}
             </div>
 
@@ -664,19 +666,18 @@ export default function CourseDetails() {
                 )}
 
                 {isPurchased && (
-                  <button 
-                    className="cd-cta-secondary" onClick={() => navigate("/my-courses")}>
-                    📚 My Courses
+                  <button className="cd-cta-secondary" onClick={() => navigate("/my-courses")}>
+                    <FaBookOpen /> My Courses
                   </button>
                 )}
 
                 {/* What's included */}
                 <div className="cd-includes">
                   <div className="cd-includes-title">This course includes</div>
-                  <div className="cd-include-item"><span className="cd-include-icon">🎬</span> Full video access</div>
-                  <div className="cd-include-item"><span className="cd-include-icon">📱</span> Mobile & desktop</div>
-                  <div className="cd-include-item"><span className="cd-include-icon">🏆</span> Certificate of completion</div>
-                  <div className="cd-include-item"><span className="cd-include-icon">♾️</span> Lifetime access</div>
+                  <div className="cd-include-item"><span className="cd-include-icon"><FaVideo /></span> Full video access</div>
+                  <div className="cd-include-item"><span className="cd-include-icon"><FaMobileAlt /></span> Mobile &amp; desktop</div>
+                  <div className="cd-include-item"><span className="cd-include-icon"><FaTrophy style={{color:'#ffcc44'}}/></span> Certificate of completion</div>
+                  <div className="cd-include-item"><span className="cd-include-icon"><FaInfinity /></span> Lifetime access</div>
                 </div>
               </div>
             </div>
@@ -706,8 +707,8 @@ export default function CourseDetails() {
             </div>
             <div className="cd-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{marginRight:4}}/> +91 98765 43210</p>
+              <p><FiMail style={{marginRight:4}}/> support@edutech.com</p>
             </div>
           </div>
           <div className="cd-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaGlobe, FaGraduationCap, FaStar, FaBullseye, FaRocket, FaLaptopCode, FaLock, FaBookOpen, FaMoon, FaChartLine, FaShoppingCart, FaUserTie } from "react-icons/fa";
 
 export default function About() {
   return (
@@ -532,7 +533,7 @@ export default function About() {
                 fontSize: "14px",
                 fontWeight: "600"
               }}>
-                🌍 Global Platform
+                <FaGlobe style={{marginRight:6}}/> Global Platform
               </div>
               <div style={{
                 padding: "12px 24px",
@@ -542,7 +543,7 @@ export default function About() {
                 fontSize: "14px",
                 fontWeight: "600"
               }}>
-                🎓 10K+ Students
+                <FaGraduationCap style={{marginRight:6}}/> 10K+ Students
               </div>
               <div style={{
                 padding: "12px 24px",
@@ -552,7 +553,7 @@ export default function About() {
                 fontSize: "14px",
                 fontWeight: "600"
               }}>
-                ⭐ 4.9 Rating
+                <FaStar style={{marginRight:6}}/> 4.9 Rating
               </div>
             </div>
           </div>
@@ -593,7 +594,7 @@ export default function About() {
               <div style={{
                 fontSize: "48px",
                 marginBottom: "20px"
-              }}>🎯</div>
+              }}><FaBullseye /></div>
               
               <h2 style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -661,7 +662,7 @@ export default function About() {
               <div style={{
                 fontSize: "48px",
                 marginBottom: "20px"
-              }}>🚀</div>
+              }}><FaRocket /></div>
               
               <h2 style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -751,32 +752,32 @@ export default function About() {
             }}>
               {[
                 {
-                  icon: "💻",
+                  icon: <FaLaptopCode />,
                   title: "Modern Interface",
                   desc: "Sleek, intuitive design that makes learning a pleasure"
                 },
                 {
-                  icon: "🔐",
+                  icon: <FaLock />,
                   title: "Bank-Grade Security",
                   desc: "Your data protected with enterprise-level encryption"
                 },
                 {
-                  icon: "📚",
+                  icon: <FaBookOpen />,
                   title: "Curated Curriculum",
                   desc: "Expert-designed courses across diverse disciplines"
                 },
                 {
-                  icon: "🌙",
+                  icon: <FaMoon />,
                   title: "Adaptive Themes",
                   desc: "Personalize your experience with dark/light modes"
                 },
                 {
-                  icon: "📈",
+                  icon: <FaChartLine />,
                   title: "Progress Analytics",
                   desc: "Track your growth with detailed insights"
                 },
                 {
-                  icon: "🛒",
+                  icon: <FaShoppingCart />,
                   title: "Smart Management",
                   desc: "Wishlist, bookmarks, and intelligent recommendations"
                 }
@@ -866,7 +867,7 @@ export default function About() {
               border: "4px solid rgba(255, 255, 255, 0.1)",
               boxShadow: "0 20px 60px rgba(153, 3, 125, 0.3)"
             }}>
-              👨‍💻
+              <FaUserTie />
             </div>
             
             <h2 style={{

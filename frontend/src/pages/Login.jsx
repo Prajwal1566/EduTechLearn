@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../asset/logow.png";
 import API from "../api";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FiAlertTriangle } from "react-icons/fi";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -408,7 +410,7 @@ export default function Login() {
             <div className="form-title">Welcome back</div>
 
             {error && (
-              <div className="error-box">⚠️ {error}</div>
+              <div className="error-box" style={{display:'flex',alignItems:'center',gap:6}}><FiAlertTriangle style={{flexShrink:0}}/> {error}</div>
             )}
 
             {/* Email */}
@@ -457,7 +459,7 @@ export default function Login() {
                   disabled={loading}
                   className="eye-btn"
                 >
-                  {showPassword ? "🔒︎" : "👁"}
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
             </div>

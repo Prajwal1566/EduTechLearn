@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./landing.css";
 import logo from "../asset/logow.png";
+import { FaUserGraduate, FaRocket, FaStar, FaRobot, FaChartBar, FaGlobe, FaBullseye } from "react-icons/fa";
 
 export default function LandingPage() {
   const [students, setStudents] = useState(0);
@@ -145,15 +146,15 @@ export default function LandingPage() {
 
           <div className="hero-image">
             <div className="floating-card card-1">
-              <div className="card-icon">🎓</div>
+              <div className="card-icon"><FaUserGraduate style={{ color: "#ffcc00", fontSize: "62px" }} /></div>
               <div className="card-text">Learning</div>
             </div>
             <div className="floating-card card-2">
-              <div className="card-icon">🚀</div>
+              <div className="card-icon"><FaRocket style={{ color: "#ff44aa", fontSize: "62px" }} /></div>
               <div className="card-text">Growth</div>
             </div>
             <div className="floating-card card-3">
-              <div className="card-icon">✨</div>
+              <div className="card-icon"><FaStar style={{ color: "#44aaff", fontSize: "62px" }} /></div>
               <div className="card-text">Excellence</div>
             </div>
           </div>
@@ -171,22 +172,22 @@ export default function LandingPage() {
         <div className="features-grid">
           {[
             {
-              icon: "🤖",
+              icon: <FaRobot style={{ color: "#aa44ff", justifyContent: "center", alignItems: "center" }} />,
               title: "AI-Powered Learning",
               desc: "Personalized courses adapted to your learning pace"
             },
             {
-              icon: "📊",
+              icon: <FaChartBar style={{ color: "#44aaff", justifyContent: "center", alignItems: "center" }} />,
               title: "Progress Tracking",
               desc: "Real-time analytics to monitor your growth"
             },
             {
-              icon: "🌍",
+              icon: <FaGlobe style={{ color: "#ffaa00" }} />,
               title: "Global Community",
               desc: "Learn with students from around the world"
             },
             {
-              icon: "🎯",
+              icon: <FaBullseye style={{ color: "#ff4466" }} />,
               title: "Goal-Oriented",
               desc: "Structured paths to achieve your goals"
             }

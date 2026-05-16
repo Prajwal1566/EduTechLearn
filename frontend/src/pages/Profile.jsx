@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaGraduationCap, FaTrophy, FaBolt, FaDownload, FaPencilAlt } from "react-icons/fa";
+import { FiPower, FiMail } from "react-icons/fi";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -356,7 +358,7 @@ export default function Profile() {
               <Link to="/profile" className="active">My Profile</Link>
             </div>
             <button className="logout-btn" onClick={handleLogout}>
-              <span>⏻</span> Logout
+              <FiPower /> Logout
             </button>
             <button
               className={`pr-hamburger ${menuOpen ? "open" : ""}`}
@@ -370,10 +372,10 @@ export default function Profile() {
 
         {/* ── MOBILE DRAWER ── */}
         <div className={`pr-drawer ${menuOpen ? "open" : ""}`}>
-          <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-          <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-          <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-          <Link to="/profile" className="active" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
+          <Link to="/home" onClick={() => setMenuOpen(false)}><FaHome /> Home</Link>
+          <Link to="/my-courses" onClick={() => setMenuOpen(false)}><FaBookOpen /> My Courses</Link>
+          <Link to="/wishlist" onClick={() => setMenuOpen(false)}><FaHeart /> Wishlist</Link>
+          <Link to="/profile" className="active" onClick={() => setMenuOpen(false)}><FaUserCircle /> My Profile</Link>
           <div className="pr-drawer-divider" />
           <div className="pr-drawer-row" style={{ width: "100%" }}>
             <button
@@ -381,7 +383,7 @@ export default function Profile() {
               style={{ width: "100%", justifyContent: "center" }}
               onClick={handleLogout}
             >
-              ⏻ Logout
+              <FiPower /> Logout
             </button>
           </div>
         </div>
@@ -420,7 +422,7 @@ export default function Profile() {
             </div>
 
             <button className="edit-btn" onClick={() => navigate("/edit-profile")}>
-              ✏️ Edit Profile
+              <FaPencilAlt /> Edit Profile
             </button>
           </div>
         </div>
@@ -429,17 +431,17 @@ export default function Profile() {
         <div className="pr-stats-strip">
           <div className="pr-stats-card">
             <div className="pr-stat-item">
-              <div className="pr-stat-icon">📚</div>
+              <div className="pr-stat-icon"><FaBookOpen style={{ color: "#4dffff" }} /></div>
               <div className="pr-stat-num">{myCourses.length}</div>
               <div className="pr-stat-label">Total Enrolled</div>
             </div>
             <div className="pr-stat-item">
-              <div className="pr-stat-icon">⚡</div>
+              <div className="pr-stat-icon"><FaBolt style={{ color: '#ffcc44' }} /></div>
               <div className="pr-stat-num">{inProgress.length}</div>
               <div className="pr-stat-label">In Progress</div>
             </div>
             <div className="pr-stat-item">
-              <div className="pr-stat-icon">🏆</div>
+              <div className="pr-stat-icon"><FaTrophy style={{ color: '#ffcc44' }} /></div>
               <div className="pr-stat-num">{completed.length}</div>
               <div className="pr-stat-label">Certificates</div>
             </div>
@@ -449,7 +451,7 @@ export default function Profile() {
         {/* ── MAIN CONTENT ── */}
         <div className="pr-content">
           <div className="pr-section-title">
-            <span>⚡</span> Courses in Progress
+            <span><FaBolt style={{ color: '#ffcc44' }} /></span> Courses in Progress
             {inProgress.length > 0 && (
               <span style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,.35)", marginLeft: 4 }}>
                 ({inProgress.length})
@@ -459,7 +461,7 @@ export default function Profile() {
 
           {!profile ? (
             <div className="course-grid">
-              {[1,2,3].map(i => (
+              {[1, 2, 3].map(i => (
                 <div key={i} className="course-card">
                   <div className="shimmer" style={{ height: 130 }} />
                   <div style={{ padding: "12px 14px" }}>
@@ -471,7 +473,7 @@ export default function Profile() {
             </div>
           ) : inProgress.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">📖</div>
+              <div className="empty-icon"><FaBookOpen /></div>
               <div className="empty-text">No courses in progress. Start learning today!</div>
             </div>
           ) : (
@@ -482,7 +484,7 @@ export default function Profile() {
                     onError={e => { e.target.style.display = "none"; }} />
                   <div className="course-info">
                     <div className="course-title">{course.title}</div>
-                    <div className="course-lecturer">👤 {course.lecturer}</div>
+                    <div className="course-lecturer"><FaUserCircle style={{ verticalAlign: 'middle', marginRight: 4 }} /> {course.lecturer}</div>
                     <div className="progress-bar-wrap">
                       <div className="progress-bar-fill" style={{ width: `${course.progress || 0}%` }} />
                     </div>
@@ -494,7 +496,7 @@ export default function Profile() {
           )}
 
           <div className="pr-section-title">
-            <span>🏆</span> Certificates
+            <span><FaTrophy style={{ color: '#ffcc44' }} /></span> Certificates
             {completed.length > 0 && (
               <span style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,.35)", marginLeft: 4 }}>
                 ({completed.length})
@@ -504,25 +506,25 @@ export default function Profile() {
 
           {!profile ? (
             <div className="cert-list">
-              {[1,2].map(i => <div key={i} className="shimmer" style={{ height: 56 }} />)}
+              {[1, 2].map(i => <div key={i} className="shimmer" style={{ height: 56 }} />)}
             </div>
           ) : completed.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">🎓</div>
+              <div className="empty-icon"><FaGraduationCap /></div>
               <div className="empty-text">Complete a course to earn your first certificate!</div>
             </div>
           ) : (
             <div className="cert-list">
               {completed.map(course => (
                 <div key={course.id} className="cert-item">
-                  <span className="cert-icon">🎓</span>
+                  <span className="cert-icon"><FaGraduationCap /></span>
                   <span className="cert-title">{course.title}</span>
                   <span className="cert-badge">COMPLETED</span>
                   <button
                     className="download-btn"
                     onClick={() => window.open(`${API}/api/certificate/${user.id}/${course.id}`, "_blank")}
                   >
-                    ⬇ Download
+                    <FaDownload /> Download
                   </button>
                 </div>
               ))}
@@ -552,8 +554,8 @@ export default function Profile() {
             </div>
             <div className="pr-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{ marginRight: 4 }} /> +91 98765 43210</p>
+              <p><FiMail style={{ marginRight: 4 }} /> support@edutech.com</p>
             </div>
           </div>
           <div className="pr-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

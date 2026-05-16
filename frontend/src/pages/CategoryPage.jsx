@@ -3,6 +3,8 @@ import logo from "../asset/logow.png";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import CourseCard from "../components/CourseCard";
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaFire, FaLaptopCode, FaRobot, FaPaintBrush, FaStar, FaGraduationCap, FaPhone, FaEnvelope, FaArrowLeft } from "react-icons/fa";
+import { FiPower } from "react-icons/fi";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -269,10 +271,10 @@ const styles = `
 `;
 
 const CATEGORY_META = {
-  Trending: { icon:"🔥", color:"#ff6644" },
-  Coding:   { icon:"💻", color:"#44aaff" },
-  AI:       { icon:"🤖", color:"#aa44ff" },
-  Design:   { icon:"🎨", color:"#ff44aa" },
+  Trending: { icon:<FaFire />, color:"#ff6644" },
+  Coding:   { icon:<FaLaptopCode />, color:"#44aaff" },
+  AI:       { icon:<FaRobot />, color:"#aa44ff" },
+  Design:   { icon:<FaPaintBrush />, color:"#ff44aa" },
 };
 
 const SORT_OPTIONS = ["Default", "Price: Low to High", "Price: High to Low", "Top Rated"];
@@ -313,7 +315,7 @@ export default function CategoryPage() {
     ? (filtered.reduce((s, c) => s + parseFloat(c.rating || 0), 0) / filtered.length).toFixed(1)
     : "—";
 
-  const meta = CATEGORY_META[category] || { icon:"📚", color:"#cc05a0" };
+  const meta = CATEGORY_META[category] || { icon:<FaBookOpen />, color:"#cc05a0" };
 
   return (
     <>
@@ -338,7 +340,7 @@ export default function CategoryPage() {
               <Link to="/wishlist">Wishlist</Link>
               <Link to="/profile">Profile</Link>
             </div>
-            <button className="cat-logout" onClick={handleLogout}><span>⏻</span> Logout</button>
+            <button className="cat-logout" onClick={handleLogout}><span><FiPower /></span> Logout</button>
             <button className={`cat-hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(prev => !prev)}>
               <span /><span /><span />
             </button>
@@ -347,13 +349,13 @@ export default function CategoryPage() {
 
         {/* Mobile drawer */}
         <div className={`cat-drawer ${menuOpen ? "open" : ""}`}>
-          <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-          <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-          <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-          <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 Profile</Link>
+          <Link to="/home" onClick={() => setMenuOpen(false)}><FaHome style={{marginRight:6}}/> Home</Link>
+          <Link to="/my-courses" onClick={() => setMenuOpen(false)}><FaBookOpen style={{marginRight:6}}/> My Courses</Link>
+          <Link to="/wishlist" onClick={() => setMenuOpen(false)}><FaHeart style={{marginRight:6}}/> Wishlist</Link>
+          <Link to="/profile" onClick={() => setMenuOpen(false)}><FaUserCircle style={{marginRight:6}}/> Profile</Link>
           <div className="cat-drawer-divider" />
           <div className="cat-drawer-actions">
-            <button className="cat-logout" onClick={handleLogout}>⏻ Logout</button>
+            <button className="cat-logout" onClick={handleLogout}><FiPower style={{marginRight:6}}/> Logout</button>
           </div>
         </div>
 
@@ -373,17 +375,17 @@ export default function CategoryPage() {
         <div className="cat-stats-strip">
           <div className="cat-stats-card">
             <div className="cat-stat">
-              <div className="cat-stat-icon">📚</div>
+              <div className="cat-stat-icon"><FaBookOpen /></div>
               <div className="cat-stat-num">{filtered.length}</div>
               <div className="cat-stat-label">Courses</div>
             </div>
             <div className="cat-stat">
-              <div className="cat-stat-icon">⭐</div>
+              <div className="cat-stat-icon"><FaStar style={{color:'#ffcc00'}}/></div>
               <div className="cat-stat-num">{avgRating}</div>
               <div className="cat-stat-label">Avg Rating</div>
             </div>
             <div className="cat-stat">
-              <div className="cat-stat-icon">🎓</div>
+              <div className="cat-stat-icon"><FaGraduationCap /></div>
               <div className="cat-stat-num">{filtered.reduce((s,c) => s + parseInt(c.students || 0), 0).toLocaleString()}</div>
               <div className="cat-stat-label">Students</div>
             </div>
@@ -418,7 +420,7 @@ export default function CategoryPage() {
               <div className="cat-empty-icon">{meta.icon}</div>
               <div className="cat-empty-title">No {category} courses yet</div>
               <div className="cat-empty-text">Check back soon or explore other categories.</div>
-              <Link to="/home" className="cat-browse-btn">← Browse All Courses</Link>
+              <Link to="/home" className="cat-browse-btn"><FaArrowLeft style={{ color: "#fff", marginRight: 4 }} /> Browse All Courses</Link>
             </div>
           ) : (
             <div className="cat-grid">
@@ -451,8 +453,8 @@ export default function CategoryPage() {
             </div>
             <div className="cat-footer-col">
               <h4>Contact</h4>
-              <p>📞 +91 98765 43210</p>
-              <p>✉️ support@edutech.com</p>
+              <p><FaPhone style={{marginRight:6,verticalAlign:'middle'}}/> +91 98765 43210</p>
+              <p><FaEnvelope style={{marginRight:6,verticalAlign:'middle'}}/> support@edutech.com</p>
             </div>
           </div>
           <div className="cat-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

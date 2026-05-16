@@ -28,6 +28,9 @@ import About from "./pages/About";
 import { Navigate } from "react-router-dom";
 
 import API from "./api";
+import { IconContext } from "react-icons";
+import { FaFire, FaLaptopCode, FaRobot, FaPaintBrush, FaChartBar, FaPlus, FaBookOpen, FaUsers, FaSearch, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FiPower } from "react-icons/fi";
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
   const admin = JSON.parse(localStorage.getItem("admin") || sessionStorage.getItem("admin") || "null");
@@ -131,18 +134,18 @@ function AdminPanel() {
 
   const byCategory = (cat) => filtered.filter(c => c.category === cat);
   const sections = [
-    { key: "Trending", icon: "🔥" },
-    { key: "Coding",   icon: "💻" },
-    { key: "AI",       icon: "🤖" },
-    { key: "Design",   icon: "🎨" },
+    { key: "Trending", icon: <FaFire /> },
+    { key: "Coding",   icon: <FaLaptopCode /> },
+    { key: "AI",       icon: <FaRobot /> },
+    { key: "Design",   icon: <FaPaintBrush /> },
   ];
   const totalCourses = courses.length;
 
   const navItems = [
-    { key: "dashboard", icon: "📊", label: "Dashboard" },
-    { key: "add",       icon: "➕", label: "Add Course" },
-    { key: "courses",   icon: "📚", label: "All Courses" },
-    { key: "users",     icon: "👥", label: "Users", link: "/admin/users" },
+    { key: "dashboard", icon: <FaChartBar />, label: "Dashboard" },
+    { key: "add",       icon: <FaPlus />, label: "Add Course" },
+    { key: "courses",   icon: <FaBookOpen />, label: "All Courses" },
+    { key: "users",     icon: <FaUsers />, label: "Users", link: "/admin/users" },
   ];
 
   // Shared sidebar nav — used in both desktop & mobile
@@ -459,25 +462,25 @@ function AdminPanel() {
           </div>
 
           <div className="adm-topbar-search">
-            <span className="adm-search-icon">🔍</span>
+            <span className="adm-search-icon"><FaSearch /></span>
             <input
               className="adm-search-input"
               placeholder="Search courses, lecturers..."
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            {search && <button className="adm-search-clear" onClick={() => setSearch("")}>✕</button>}
+            {search && <button className="adm-search-clear" onClick={() => setSearch("")}><FaTimes /></button>}
           </div>
 
           <div className="adm-topbar-right">
-            <button className="adm-mob-search-btn" onClick={() => setSearchOpen(v => !v)}>🔍</button>
-            <div className="adm-admin-tag">👤 Admin</div>
-            <button className="adm-logout-btn" onClick={handleLogout}>⏻ Logout</button>
+            <button className="adm-mob-search-btn" onClick={() => setSearchOpen(v => !v)}><FaSearch /></button>
+            <div className="adm-admin-tag"><FaUserCircle style={{marginRight:4,verticalAlign:'middle'}}/> Admin</div>
+            <button className="adm-logout-btn" onClick={handleLogout}><FiPower style={{marginRight:4}}/> Logout</button>
           </div>
         </header>
 
         <div className={`adm-mob-searchbar ${searchOpen ? "open" : ""}`}>
-          <span className="adm-search-icon">🔍</span>
+          <span className="adm-search-icon"><FaSearch /></span>
           <input
             className="adm-search-input"
             placeholder="Search courses, lecturers..."
@@ -485,7 +488,7 @@ function AdminPanel() {
             onChange={e => setSearch(e.target.value)}
             autoFocus={searchOpen}
           />
-          {search && <button className="adm-search-clear" onClick={() => setSearch("")}>✕</button>}
+          {search && <button className="adm-search-clear" onClick={() => setSearch("")}><FaTimes /></button>}
         </div>
 
         <div className={`adm-body ${sidebarOpen ? "sidebar-open" : ""}`}>
@@ -510,10 +513,10 @@ function AdminPanel() {
               <>
                 <div className="adm-stats-row">
                   {[
-                    { icon:"📚", num:totalCourses,                 label:"Total Courses", color:"#99037d" },
-                    { icon:"🔥", num:byCategory("Trending").length, label:"Trending",      color:"#e05a00" },
-                    { icon:"💻", num:byCategory("Coding").length,   label:"Coding",        color:"#0066cc" },
-                    { icon:"🤖", num:byCategory("AI").length,       label:"AI",            color:"#006644" },
+                    { icon:<FaBookOpen />, num:totalCourses,                 label:"Total Courses", color:"#99037d" },
+                    { icon:<FaFire />, num:byCategory("Trending").length, label:"Trending",      color:"#e05a00" },
+                    { icon:<FaLaptopCode />, num:byCategory("Coding").length,   label:"Coding",        color:"#0066cc" },
+                    { icon:<FaRobot />, num:byCategory("AI").length,       label:"AI",            color:"#006644" },
                   ].map((s, i) => (
                     <div key={i} className="adm-stat-card" style={{ "--accent": s.color }}>
                       <div className="adm-stat-icon">{s.icon}</div>
@@ -525,7 +528,7 @@ function AdminPanel() {
 
                 {search && (
                   <div className="adm-search-notice">
-                    🔍 {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "<strong>{search}</strong>"
+                    <FaSearch style={{marginRight:6}}/> {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "<strong>{search}</strong>"
                     <button onClick={() => setSearch("")}>Clear</button>
                   </div>
                 )}
@@ -577,11 +580,11 @@ function AdminPanel() {
             {activeTab === "courses" && (
               <div className="adm-tab-wrap">
                 <div className="adm-section-title" style={{ marginBottom:20 }}>
-                  📚 All Courses <span className="adm-section-count">{filtered.length}</span>
+                  <FaBookOpen style={{marginRight:6}}/> All Courses <span className="adm-section-count">{filtered.length}</span>
                 </div>
                 {search && (
                   <div className="adm-search-notice">
-                    🔍 {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "<strong>{search}</strong>"
+                    <FaSearch style={{marginRight:6}}/> {filtered.length} result{filtered.length !== 1 ? "s" : ""} for "<strong>{search}</strong>"
                     <button onClick={() => setSearch("")}>Clear</button>
                   </div>
                 )}
@@ -603,7 +606,8 @@ function AdminPanel() {
 
 function App() {
   return (
-    <Router>
+    <IconContext.Provider value={{ style: { verticalAlign: 'text-top', display: 'inline-block' }, className: 'react-icon-global' }}>
+      <Router>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
@@ -637,7 +641,22 @@ function App() {
 
       </Routes>
     </Router>
+    </IconContext.Provider>
   );
 }
+
+// Global style for the icons to make them eye-catching and structured
+const globalIconStyle = document.createElement('style');
+globalIconStyle.innerHTML = `
+  .react-icon-global {
+    vertical-align: text-top;
+    display: inline-block;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  .react-icon-global:hover {
+    filter: brightness(1.2) drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.2));
+  }
+`;
+document.head.appendChild(globalIconStyle);
 
 export default App;

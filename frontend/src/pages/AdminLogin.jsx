@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
+import { FaShieldAlt, FaLock, FaEye, FaEyeSlash, FaClock } from "react-icons/fa";
+import { FiAlertTriangle } from "react-icons/fi";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -218,7 +220,7 @@ const styles = `
     animation: fadeIn 0.3s ease;
   }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  .al-locked-icon { font-size: 36px; }
+  .al-locked-icon { font-size: 36px; display: flex; align-items: center; justify-content: center; }
   .al-locked-title {
     font-weight: 700; font-size: 17px; color: #ff6666;
   }
@@ -329,13 +331,13 @@ export default function AdminLogin() {
         <div className="al-card">
           {locked && (
             <div className="al-locked">
-              <div className="al-locked-icon">🔐</div>
+              <div className="al-locked-icon"><FaLock style={{color:"#ff9944"}}/></div>
               <div className="al-locked-title">Account Locked</div>
               <div className="al-locked-sub">
                 Too many failed attempts.<br />
                 Access temporarily suspended.
               </div>
-              <div className="al-locked-timer">⏱ {lockTimer}s remaining</div>
+              <div className="al-locked-timer"><FaClock style={{verticalAlign:'middle',marginRight:4}}/> {lockTimer}s remaining</div>
             </div>
           )}
 
@@ -343,7 +345,7 @@ export default function AdminLogin() {
 
           {/* Brand */}
           <div className="al-brand">
-            <div className="al-icon">🛡️</div>
+            <div className="al-icon"><FaShieldAlt /></div>
             <div className="al-brand-text">
               <div className="al-label">Admin Portal</div>
               <div className="al-title">EDU-TECH</div>
@@ -353,7 +355,7 @@ export default function AdminLogin() {
           <div className="al-divider" />
 
           {/* Error */}
-          {error && <div className="al-error">⚠ {error}</div>}
+          {error && <div className="al-error" style={{display:'flex',alignItems:'center',gap:6}}><FiAlertTriangle /> {error}</div>}
 
           {/* Attempts warning */}
           {attempts > 0 && !locked && (
@@ -392,7 +394,7 @@ export default function AdminLogin() {
                 autoComplete="current-password"
               />
               <button className="al-eye" onClick={() => setShowPass(!showPass)} type="button" tabIndex={-1}>
-                {showPass ? "🔒︎" : "👁"}
+                {showPass ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
           </div>
@@ -426,7 +428,7 @@ export default function AdminLogin() {
               <div className="al-dot" />
               <span className="al-status-txt">SYSTEM ONLINE</span>
             </div>
-            <div className="al-footer-right">🔒 256-BIT SSL</div>
+            <div className="al-footer-right"><FaLock style={{verticalAlign:'text-bottom',marginRight:2}}/> 256-BIT SSL</div>
           </div>
         </div>
       </div>

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
-
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaSearch } from "react-icons/fa";
+import { FiPower, FiMail, FiAlertTriangle } from "react-icons/fi";
 
 export default function Wishlist() {
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ export default function Wishlist() {
         {/* Desktop actions */}
         <div className="wl-nav-actions">
           <button className="wl-logout-btn" onClick={handleLogout}>
-            <span>⏻</span> Logout
+            <FiPower /> Logout
           </button>
         </div>
 
@@ -96,14 +97,14 @@ export default function Wishlist() {
 
       {/* Mobile Drawer */}
       <div className={`wl-drawer ${menuOpen ? "open" : ""}`}>
-        <Link to="/home"       onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-        <Link to="/my-courses" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-        <Link to="/wishlist" className="active" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-        <Link to="/profile"    onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
+        <Link to="/home"       onClick={() => setMenuOpen(false)}><FaHome /> Home</Link>
+        <Link to="/my-courses" onClick={() => setMenuOpen(false)}><FaBookOpen /> My Courses</Link>
+        <Link to="/wishlist" className="active" onClick={() => setMenuOpen(false)}><FaHeart /> Wishlist</Link>
+        <Link to="/profile"    onClick={() => setMenuOpen(false)}><FaUserCircle /> My Profile</Link>
         <div className="wl-drawer-divider" />
         <div className="wl-drawer-row" style={{ width: "100%" }}>
           <button className="wl-logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>
-            ⏻ Logout
+            <FiPower /> Logout
           </button>
         </div>
       </div>
@@ -112,14 +113,14 @@ export default function Wishlist() {
       <div className="wl-hero">
         <div className="wl-hero-inner">
           <div className="wl-hero-left">
-            <div className="wl-hero-icon">❤️</div>
+            <div className="wl-hero-icon"><FaHeart style={{color:'#e060c8'}}/></div>
             <div>
               <h1 className="wl-hero-title">My Wishlist</h1>
               <p className="wl-hero-sub">Courses you've saved — enroll anytime</p>
             </div>
           </div>
           <div className="wl-hero-badge">
-            ❤️ {wishlistCourses.length} {wishlistCourses.length === 1 ? "Course" : "Courses"} Saved
+            <FaHeart style={{color:'#e060c8'}}/> {wishlistCourses.length} {wishlistCourses.length === 1 ? "Course" : "Courses"} Saved
           </div>
         </div>
       </div>
@@ -138,16 +139,16 @@ export default function Wishlist() {
         {/* FIX 6: Show error state if fetch failed, otherwise original empty/grid UI */}
         {fetchError ? (
           <div className="wl-empty">
-            <div className="wl-empty-icon">⚠️</div>
+            <div className="wl-empty-icon"><FiAlertTriangle /></div>
             <h3 className="wl-empty-title">Could not load courses</h3>
             <p className="wl-empty-text">Please check your connection or try again later.</p>
           </div>
         ) : wishlistCourses.length === 0 ? (
           <div className="wl-empty">
-            <div className="wl-empty-icon">💔</div>
+            <div className="wl-empty-icon"><FaHeart style={{color:'rgba(255,255,255,0.2)'}}/></div>
             <h3 className="wl-empty-title">Your wishlist is empty</h3>
-            <p className="wl-empty-text">Browse courses and tap ❤️ to save ones you love!</p>
-            <Link to="/home" className="wl-browse-btn">🔍 Browse Courses</Link>
+            <p className="wl-empty-text">Browse courses and tap <FaHeart style={{color:'#e060c8',verticalAlign:'middle'}}/> to save ones you love!</p>
+            <Link to="/home" className="wl-browse-btn"><FaSearch /> Browse Courses</Link>
           </div>
         ) : (
           <div className="wl-grid">
@@ -180,8 +181,8 @@ export default function Wishlist() {
           </div>
           <div className="wl-footer-col">
             <h4>Contact</h4>
-            <p>📞 +91 98765 43210</p>
-            <p>✉️ support@edutech.com</p>
+            <p><FaPhone style={{marginRight:4}}/> +91 98765 43210</p>
+            <p><FiMail style={{marginRight:4}}/> support@edutech.com</p>
           </div>
         </div>
         <div className="wl-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

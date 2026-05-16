@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -238,7 +239,7 @@ export default function Terms() {
             </div>
           </Link>
           <button className="tc-back" onClick={() => navigate(-1)}>
-            <span className="tc-back-arrow">←</span>
+            <span className="tc-back-arrow"><FaArrowLeft style={{ color: "#fff" }} /></span>
             Back
           </button>
         </nav>

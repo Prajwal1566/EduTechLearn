@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../asset/logow.png";
 import API from "../api";
+import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
+import { FiAlertTriangle, FiCheckCircle } from "react-icons/fi";
+import { MdLockReset } from "react-icons/md";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -540,8 +543,8 @@ export default function ForgotPassword() {
               </>
             )}
 
-            {error && <div className="error-box">⚠️ {error}</div>}
-            {success && <div className="success-box">✓ {success}</div>}
+            {error && <div className="error-box" style={{display:'flex',alignItems:'center',gap:6}}><FiAlertTriangle style={{flexShrink:0}}/> {error}</div>}
+            {success && <div className="success-box" style={{display:'flex',alignItems:'center',gap:6}}><FiCheckCircle style={{flexShrink:0}}/> {success}</div>}
 
             {/* STEP 1: Email */}
             {step === 1 && (
@@ -603,7 +606,7 @@ export default function ForgotPassword() {
                       className="field-input has-btn"
                     />
                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="eye-btn">
-                      {showPassword ? "🔒︎" : "👁"}
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                   </div>
                 </div>
@@ -619,7 +622,7 @@ export default function ForgotPassword() {
                       className="field-input has-btn"
                     />
                     <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="eye-btn">
-                      {showConfirm ? "🔒︎" : "👁"}
+                      {showConfirm ? <FaEyeSlash /> : <FaEye />}
                     </button>
                   </div>
                   {confirmPassword.length > 0 && password !== confirmPassword && (
@@ -638,7 +641,7 @@ export default function ForgotPassword() {
             {/* STEP 4: Success */}
             {step === 4 && (
               <div className="success-screen">
-                <div className="success-icon">✔️</div>
+                <div className="success-icon"><MdLockReset /></div>
                 <div className="success-title">Password Changed!</div>
                 <div className="success-desc">Your password has been reset successfully. You can now login with your new password.</div>
                 <button onClick={() => navigate("/")} className="submit-btn">
@@ -649,7 +652,7 @@ export default function ForgotPassword() {
 
             {step < 4 && (
               <div className="card-footer">
-                <Link to="/" className="back-link">← Back to Login</Link>
+                <Link to="/" className="back-link"><FaArrowLeft style={{ color: "#fff", marginRight: 4 }} /> Back to Login</Link>
               </div>
             )}
           </div>

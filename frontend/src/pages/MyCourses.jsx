@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import CourseCard from "../components/CourseCard";
 import { Link, useNavigate } from "react-router-dom";
-
 import API from "../api";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaDownload, FaBackpack, FaTrophy, FaBolt, FaSearch } from "react-icons/fa";
+import { FiPower, FiMail } from "react-icons/fi";
 
 export default function MyCourses() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function MyCourses() {
 
         <div className="mc-nav-actions">
           <button className="mc-logout-btn" onClick={handleLogout}>
-            <span>⏻</span> Logout
+            <FiPower /> Logout
           </button>
         </div>
 
@@ -70,14 +71,14 @@ export default function MyCourses() {
 
       {/* Mobile Drawer */}
       <div className={`mc-drawer ${menuOpen ? "open" : ""}`}>
-        <Link to="/home" onClick={() => setMenuOpen(false)}>🏠 Home</Link>
-        <Link to="/my-courses" className="active" onClick={() => setMenuOpen(false)}>📚 My Courses</Link>
-        <Link to="/wishlist" onClick={() => setMenuOpen(false)}>❤️ Wishlist</Link>
-        <Link to="/profile" onClick={() => setMenuOpen(false)}>👤 My Profile</Link>
+        <Link to="/home" onClick={() => setMenuOpen(false)}><FaHome /> Home</Link>
+        <Link to="/my-courses" className="active" onClick={() => setMenuOpen(false)}><FaBookOpen /> My Courses</Link>
+        <Link to="/wishlist" onClick={() => setMenuOpen(false)}><FaHeart /> Wishlist</Link>
+        <Link to="/profile" onClick={() => setMenuOpen(false)}><FaUserCircle /> My Profile</Link>
         <div className="mc-drawer-divider" />
         <div className="mc-drawer-row" style={{ width: "100%" }}>
           <button className="mc-logout-btn" style={{ width: "100%", justifyContent: "center" }} onClick={handleLogout}>
-            ⏻ Logout
+            <FiPower /> Logout
           </button>
         </div>
       </div>
@@ -86,7 +87,7 @@ export default function MyCourses() {
       <div className="mc-hero">
         <div className="mc-hero-inner">
           <div className="mc-hero-left">
-            <div className="mc-hero-icon">📚</div>
+            <div className="mc-hero-icon"><FaBookOpen style={{color:'#e060c8'}}/></div>
             <div>
               <h1 className="mc-hero-title">My Courses</h1>
               <p className="mc-hero-sub">Track your learning journey</p>
@@ -129,10 +130,10 @@ export default function MyCourses() {
           </div>
         ) : courses.length === 0 ? (
           <div className="mc-empty">
-            <div className="mc-empty-icon">🎒</div>
+            <div className="mc-empty-icon"><FaBookOpen style={{color:'rgba(255,255,255,0.3)'}}/></div>
             <h3 className="mc-empty-title">No courses yet</h3>
             <p className="mc-empty-text">You haven't enrolled in any courses yet.</p>
-            <Link to="/home" className="mc-browse-btn">🔍 Browse Courses</Link>
+            <Link to="/home" className="mc-browse-btn"><FaSearch /> Browse Courses</Link>
           </div>
         ) : (
           <>
@@ -140,7 +141,7 @@ export default function MyCourses() {
             {inProgress.length > 0 && (
               <div className="mc-section">
                 <div className="mc-section-title">
-                  ⚡ In Progress
+                  <FaBolt style={{color:'#ffcc44'}}/> In Progress
                   <span className="mc-count-pill">{inProgress.length}</span>
                 </div>
                 <div className="mc-grid">
@@ -180,7 +181,7 @@ export default function MyCourses() {
             {completed.length > 0 && (
               <div className="mc-section">
                 <div className="mc-section-title">
-                  🏆 Completed
+                  <FaTrophy style={{color:'#ffcc44'}}/> Completed
                   <span className="mc-count-pill">{completed.length}</span>
                 </div>
                 <div className="mc-grid">
@@ -197,7 +198,7 @@ export default function MyCourses() {
                         className="mc-cert-btn"
                         onClick={() => window.open(`${API}/api/certificate/${user.id}/${course.id}`)}
                       >
-                        ⬇ Download Certificate
+                        <FaDownload /> Download Certificate
                       </button>
                     </div>
                   ))}
@@ -230,8 +231,8 @@ export default function MyCourses() {
           </div>
           <div className="mc-footer-col">
             <h4>Contact</h4>
-            <p>📞 +91 98765 43210</p>
-            <p>✉️ support@edutech.com</p>
+            <p><FaPhone style={{marginRight:4}}/> +91 98765 43210</p>
+            <p><FiMail style={{marginRight:4}}/> support@edutech.com</p>
           </div>
         </div>
         <div className="mc-footer-bottom">© 2026 EDU-TECH. All rights reserved.</div>

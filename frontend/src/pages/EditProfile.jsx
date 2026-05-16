@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
+import { FaUser, FaEdit, FaImage, FaSave, FaCheckCircle, FaCheck, FaArrowLeft, FaPencilAlt } from "react-icons/fa";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -432,24 +433,24 @@ export default function EditProfile() {
         setAbout(data.about || "");
         setPreview(data.profile_image || "");
         setLoading(false);
-       if (data.profile_image) {
-  const fullUrl = API + data.profile_image;
-  setProfileImage(fullUrl);
-  setPreview(fullUrl);
-} else {
-  setProfileImage("");
-  setPreview("");
-}
+        if (data.profile_image) {
+          const fullUrl = API + data.profile_image;
+          setProfileImage(fullUrl);
+          setPreview(fullUrl);
+        } else {
+          setProfileImage("");
+          setPreview("");
+        }
       });
   }, [user.id]);
 
   const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
 
-  setImageFile(file);
-  setPreview(URL.createObjectURL(file)); // instant preview
-};
+    setImageFile(file);
+    setPreview(URL.createObjectURL(file)); // instant preview
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -457,7 +458,7 @@ export default function EditProfile() {
     formData.append("name", name);
     formData.append("about", about);
 
-// only send file if user selected new one
+    // only send file if user selected new one
     if (imageFile) {
       formData.append("profile_image", imageFile);
     }
@@ -495,19 +496,19 @@ export default function EditProfile() {
           </Link>
           <div className="ep-navbar-right">
             <button className="back-btn" onClick={() => navigate("/profile")}>
-              ← Back to Profile
+              <FaArrowLeft style={{ color: "#fff" }} /> Back to Profile
             </button>
           </div>
         </nav>
 
         <div className="ep-main">
-          <div className="ep-page-title">Edit Profile</div>
+          <div className="ep-page-title"><FaPencilAlt style={{ color: "#fff", marginRight: 8 }} /> Edit Profile</div>
           <div className="ep-page-sub">Update your personal information and preferences</div>
 
           {/* Profile Preview Card */}
           <div className="ep-card">
             <div className="ep-card-header">
-              <div className="ep-card-icon">👤</div>
+              <div className="ep-card-icon"><FaUser style={{ color: "#ffffffff" }} /></div>
               <div className="ep-card-title">Profile Preview</div>
             </div>
             <div className="ep-card-body">
@@ -518,7 +519,7 @@ export default function EditProfile() {
                       ? <img src={preview || profileImage} alt="avatar" />
                       : initials}
                   </div>
-                  <div className="avatar-badge">✓</div>
+                  <div className="avatar-badge"><FaCheck style={{ color: "#ffffffff" }} /></div>
                 </div>
                 <div className="avatar-info">
                   {loading
@@ -534,7 +535,7 @@ export default function EditProfile() {
           {/* Personal Info Card */}
           <div className="ep-card">
             <div className="ep-card-header">
-              <div className="ep-card-icon">✏️</div>
+              <div className="ep-card-icon"><FaEdit style={{ color: "#ffffffff" }} /></div>
               <div className="ep-card-title">Personal Information</div>
             </div>
             <div className="ep-card-body">
@@ -578,7 +579,7 @@ export default function EditProfile() {
           {/* Profile Image Card */}
           <div className="ep-card">
             <div className="ep-card-header">
-              <div className="ep-card-icon">🖼️</div>
+              <div className="ep-card-icon"><FaImage style={{ color: "#ffffffff" }} /></div>
               <div className="ep-card-title">Profile Image</div>
             </div>
             <div className="ep-card-body">
@@ -588,23 +589,23 @@ export default function EditProfile() {
                 <div className="field" style={{ marginBottom: 0 }}>
                   <label className="field-label">Upload Profile Image</label>
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="field-input"
-                />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="field-input"
+                  />
 
-                <div className="field-hint">Choose an image from your device</div>
-                
-                {preview && (
-                  <div className="url-preview">
-                    <div className="url-preview-img">
-                      <img src={preview} alt="preview" />
+                  <div className="field-hint">Choose an image from your device</div>
+
+                  {preview && (
+                    <div className="url-preview">
+                      <div className="url-preview-img">
+                        <img src={preview} alt="preview" />
+                      </div>
+                      <div className="url-preview-text">Selected image preview</div>
                     </div>
-                    <div className="url-preview-text">Selected image preview</div>
-                  </div>
-                )}
+                  )}
                 </div>
               )}
             </div>
@@ -617,14 +618,14 @@ export default function EditProfile() {
                 <button onClick={handleSave} disabled={saving || loading} className="btn-save">
                   {saving
                     ? <>Saving<span className="dot">.</span><span className="dot">.</span><span className="dot">.</span></>
-                    : "💾 Save Changes"}
+                    : <><FaSave style={{ color: "#ffffffff" }} /> Save Changes</>}
                 </button>
                 <button onClick={() => navigate("/profile")} className="btn-cancel">
                   Cancel
                 </button>
                 {saved && (
                   <div className="save-feedback">
-                    ✓ Saved! Redirecting...
+                    <FaCheckCircle style={{ marginRight: 4 }} /> Saved! Redirecting...
                   </div>
                 )}
               </div>
