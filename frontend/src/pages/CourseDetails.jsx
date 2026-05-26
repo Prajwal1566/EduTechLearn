@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../asset/logow.png";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import API from "../api";
-import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaGraduationCap, FaTrophy, FaLock, FaVideo, FaMobileAlt, FaDownload, FaGlobe, FaClock, FaStar, FaInfinity, FaChevronRight, FaArrowRight } from "react-icons/fa";
+import { FaHome, FaBookOpen, FaHeart, FaUserCircle, FaPhone, FaTrophy, FaLock, FaVideo, FaMobileAlt, FaGlobe, FaClock, FaInfinity, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import { FiPower, FiMail } from "react-icons/fi";
 
 const styles = `
