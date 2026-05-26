@@ -23,7 +23,7 @@ export default function SplashScreen({ onFinish }) {
         const t4 = setTimeout(() => setPhase("done"), 3200);
         const t5 = setTimeout(() => onFinish?.(), 3900);
         return () => [t1, t2, t3, t4, t5].forEach(clearTimeout);
-    }, []);
+    }, [onFinish]);
 
     // Spawn branded floating particles on logo arrival
     useEffect(() => {
