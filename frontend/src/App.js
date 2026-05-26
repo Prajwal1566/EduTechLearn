@@ -24,6 +24,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CategoryPage from "./pages/CategoryPage";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import SplashScreen from "./pages/Splash";
 
 import { Navigate } from "react-router-dom";
 
@@ -605,6 +606,20 @@ function AdminPanel() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    // Check if splash has already been shown in this session
+    return !sessionStorage.getItem("splashShown");
+  });
+
+  const handleSplashFinish = () => {
+    sessionStorage.setItem("splashShown", "true");
+    setShowSplash(false);
+  };
+
+  if (showSplash) {
+    return <SplashScreen onFinish={handleSplashFinish} />;
+  }
+
   return (
     <IconContext.Provider value={{ style: { verticalAlign: 'text-top', display: 'inline-block' }, className: 'react-icon-global' }}>
       <Router>
